@@ -1,0 +1,159 @@
+#!/bin/bash -e
+#set -x
+
+# Allow running only `./create_deployment` to show --help output
+function usage() {
+    echo "Example: ./run_deployment --container-name openmm --image <registry url>/<namespace>/<image>:<tag> --order <SAS order> --http-port <port> [--debug, --tls]"
+}
+
+if [ $# -eq 0 ] ; then
+    usage
+    exit 0
+fi
+
+while [[ $# -gt 0 ]]; do
+    key="$1"
+    case ${key} in
+        -h|--help)
+            shift
+            usage
+            exit 0
+            ;;
+        -c|--container-name)
+            shift # past argument
+            CONTAINER_NAME="$1"
+            shift # past value
+            ;;
+        -i|--image)
+            shift # past argument
+            SAS_DOCKER_IMAGE="$1"
+            shift # past value
+            ;;
+        -o|--order)
+            shift # past argument
+            SAS_ORDER="$1"
+            shift # past value
+            ;;
+        -p|--http-port)
+            shift # past argument
+            SAS_HTTP_PORT="$1"
+            shift # past value
+            ;;
+        -s|--https-port)
+            shift # past argument
+            SAS_HTTPS_PORT="$1"
+            shift # past value
+            ;;
+        -d|--debug)
+            shift # past argument
+            SAS_RUN_DEBUG=true
+            ;;
+        -t|--tls)
+            shift # past argument
+            SAS_RUN_TLS=true
+            ;;
+        *)
+            echo -e "\n\nOne or more arguments were not recognized: \n$@"
+            echo
+            usage
+            echo
+            exit 1
+            shift
+    ;;
+    esac
+done
+
+[[ -z ${CONTAINER_NAME+x} ]] && CONTAINER_NAME=openmm
+[[ -z ${SAS_HTTP_PORT+x} ]]  && SAS_HTTP_PORT=8080
+[[ -z ${SAS_HTTPS_PORT+x} ]] && SAS_HTTPS_PORT=443
+
+if [[ -z $SAS_DOCKER_IMAGE ]]; then
+    echo
+    usage
+    echo
+    exit 1
+fi
+
+if [[ ! -f ${PWD}/SASViyaV0300_${SAS_ORDER}_Linux_x86-64.txt ]]; then
+    echo
+    echo Could not find license file ${PWD}/SASViyaV0300_${SAS_ORDER}_Linux_x86-64.txt
+    echo
+    exit 1
+fi
+
+if [[ -f ${PWD}/sssd.conf ]]; then
+    chmod -v 0600 sssd.conf
+    sudo chown -v root sssd.conf
+    echo
+fi
+
+if [[ -f ${PWD}/sitedefault.yml ]]; then
+    sudo chown -v 1001:1001 sitedefault.yml
+    echo
+fi
+
+SAS_DEBUG_OPTIONS=''
+SAS_RUN_OPTIONS=''
+if [[ ${SAS_RUN_DEBUG} == "true" ]]; then
+    SAS_DEBUG_OPTIONS="--env CONSUL_UI_FLAG=true --env SAS_LOGS_TO_STDOUT=false"
+    SAS_RUN_OPTIONS="while : ; do echo Sleep; sleep 1000; done"
+fi
+SAS_TLS_OPTIONS=""
+if [[ ${SAS_RUN_TLS} == "true" ]]; then
+    SAS_TLS_OPTIONS="--mount type=bind,source=${PWD}/casigned.crt,target=/etc/pki/tls/certs/localhost.crt --mount type=bind,source=${PWD}/servertls.key,target=/etc/pki/tls/private/localhost.key --env SSL_CERT_NAME=localhost.crt --env SSL_KEY_NAME=localhost.key"
+fi
+
+echo
+chmod a+rw /var/run/docker.sock
+
+if [[ ${SAS_RUN_DEBUG} == "true" ]]; then
+    docker run \
+        --detach \
+        --env SAS_HTTP_PORT=${SAS_HTTP_PORT} \
+        --env SAS_HTTPS_PORT=${SAS_HTTPS_PORT} \
+        ${SAS_DEBUG_OPTIONS} \
+        --publish ${SAS_HTTP_PORT}:8080 \
+        --publish ${SAS_HTTPS_PORT}:6443 \
+        --publish-all \
+        --mount type=bind,source="${PWD}/sssd.conf",target=/etc/sssd/sssd.conf \
+        --mount type=bind,source="${PWD}/SASViyaV0300_${SAS_ORDER}_Linux_x86-64.txt",target=/opt/sas/viya/config/license.sas \
+        --mount type=bind,source="${PWD}/sitedefault.yml",target=/opt/sas/viya/config/etc/consul.d/default/sitedefault.yml \
+        --mount type=volume,source=consul-${CONTAINER_NAME},target=/consul/data \
+        --mount type=volume,source=postgres-${CONTAINER_NAME},target=/database/data \
+        --mount type=volume,source=caspermstore-${CONTAINER_NAME},target=/cas/permstore \
+        --mount type=volume,source=casdata-${CONTAINER_NAME},target=/cas/data \
+        --mount type=volume,source=sasmmastore-${CONTAINER_NAME},target=/opt/sas/viya/config/data/modelsvr/astore \
+        --mount type=volume,source=sasmmsresources-${CONTAINER_NAME},target=/opt/sas/viya/config/data/modelsvr/resources \
+        ${SAS_TLS_OPTIONS} \
+        --hostname modelmanager \
+        --name $CONTAINER_NAME \
+        -v /var/run/docker.sock:/var/run/docker.sock
+        $SAS_DOCKER_IMAGE /bin/bash -c "while : ; do echo Sleep; sleep 1000; done"
+else
+    docker run \
+        --detach \
+        --env SAS_HTTP_PORT=${SAS_HTTP_PORT} \
+        --env SAS_HTTPS_PORT=${SAS_HTTPS_PORT} \
+        ${SAS_DEBUG_OPTIONS} \
+        --publish ${SAS_HTTP_PORT}:8080 \
+        --publish ${SAS_HTTPS_PORT}:6443 \
+        --publish-all \
+        --mount type=bind,source="${PWD}/sssd.conf",target=/etc/sssd/sssd.conf \
+        --mount type=bind,source="${PWD}/SASViyaV0300_${SAS_ORDER}_Linux_x86-64.txt",target=/opt/sas/viya/config/license.sas \
+        --mount type=bind,source="${PWD}/sitedefault.yml",target=/opt/sas/viya/config/etc/consul.d/default/sitedefault.yml \
+        --mount type=volume,source=consul-${CONTAINER_NAME},target=/consul/data \
+        --mount type=volume,source=postgres-${CONTAINER_NAME},target=/database/data \
+        --mount type=volume,source=caspermstore-${CONTAINER_NAME},target=/cas/permstore \
+        --mount type=volume,source=casdata-${CONTAINER_NAME},target=/cas/data \
+        --mount type=volume,source=sasmmastore-${CONTAINER_NAME},target=/opt/sas/viya/config/data/modelsvr/astore \
+        --mount type=volume,source=sasmmsresources-${CONTAINER_NAME},target=/opt/sas/viya/config/data/modelsvr/resources \
+        ${SAS_TLS_OPTIONS} \
+        --hostname modelmanager \
+        --name $CONTAINER_NAME \
+        -v /var/run/docker.sock:/var/run/docker.sock
+        $SAS_DOCKER_IMAGE
+fi
+echo
+
+unset SAS_SUB_ORDER
+unset SAS_ORDER
