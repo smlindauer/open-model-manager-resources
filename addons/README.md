@@ -81,11 +81,13 @@ Two more things to be done before user is able to publish Python or R model to m
 
 
 ### Create publish destinations
-There's one Python script (create_destinations.py) in current folder. It could help user to create new destinations for types of aws and privateDocker.
+Three Python scripts could help user to create new destinations for types of cas, aws and privateDocker.
 
-<b>Make sure that you modify the SAS account and AWS access key information in the script before execution. </b>
+<b>Make sure that you modify the SAS account, AWS access key information or private docker information in the script before execution. </b>
 ```
-python create_destinations.py
+python create_cas_destination.py
+python create_aws_destination.py
+python create_privatedocker_destination.py
 ```
 
 

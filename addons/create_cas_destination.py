@@ -1,6 +1,6 @@
 import mmAuthorization
 import requests
-import json, os, pprint
+import json
 
 public_ip = "localhost"
 host_url="http://" + public_ip + ":8080"
@@ -12,10 +12,6 @@ admin_userId = "SAS_USER_ADMIN_ID"
 user_passwd = "SAS_USER_PASSWD"
 
 admin_auth_token = mm_auth.get_auth_token(host_url, admin_userId, user_passwd)
-
-destination_admin_headers = {
-    mmAuthorization.AUTHORIZATION_HEADER: mmAuthorization.AUTHORIZATION_TOKEN + admin_auth_token
-}
 
 destination_cas_headers = {
     "If-Match":"false",

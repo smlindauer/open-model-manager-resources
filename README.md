@@ -11,7 +11,7 @@ The [addons folder](addons/) provides useful instructions about
 * how to install extra Python packages into the Open MM container;
 * how to change PyMAS configuration in the container;
 * how to turn on debug for specific service using sas-admin util;
-* how to create AWS and/or private docker publish destinations with Python script;
+* how to create CAS, AWS and/or private docker publish destinations with Python script;
 * how to create container base images for Python2, Python3 and R models with Python script;
 
 ## Examples
