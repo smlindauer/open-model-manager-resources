@@ -1,20 +1,22 @@
 # Open Model Manager Resources
 
-The location is used to store start scripts and some good examples to run Open Model Manager version.
-For Detailed deployment guide, please refer to SAS Open Model Manager 1.2 for Containers: Deployment Guide.
+This repository is used to store start scripts and some samples to use with SAS Open Model Manager.
+
+For more information about deploying the container, see [SAS Open Model Manager 1.2 for Containers: Deployment Guide](http://documentation.sas.com/?docsetId=dplymdlmgmt0phy0dkr&docsetTarget=titlepage.htm&docsetVersion=1.2&locale=en).
 
 ## Start Script
-The script file under [runOpenMM folder](runOpenMM/) is to help launch the Open Model Manager smoothly.
+The script file under [runOpenMM folder](runOpenMM/) is to help launch SAS Open Model Manager smoothly.
 
 ## Addons
-The [addons folder](addons/) provides useful instructions about
-* how to install extra Python packages into the Open MM container;
-* how to change PyMAS configuration in the container;
-* how to turn on debug for specific service using sas-admin util;
-* how to create CAS, AWS and/or private docker publish destinations with Python script;
-* how to create container base images for Python2, Python3 and R models with Python script;
+The [addons folder](addons/) conains how-to information for the following tasks:
+* install extra Python packages into the SAS Open Model Manager container
+* change the PyMAS configuration in the container
+* turn on debugging for a specific service using the sas-admin CLI
+* create a CAS, Amazon Web Services (AWS), or Private Docker publishing destination using a Python script
+* create container base images for Python2, Python3 and R models using a Python script
 
-## Examples
-The [examples folder](examples/) provides two sample models for Python and R.  
+## Samples
+The [samples folder](samples/) contains two sample models for Python and R.  
 
-## Tutorial
+## Tutorials
+The [tutorials folder](tutorials/) contains examples for how to...
