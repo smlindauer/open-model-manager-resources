@@ -21,7 +21,7 @@ This directory contains the scripts to launch and debug the SAS Open Model Manag
 
 ```
 cd deployment
-./run_deployment --container-name openmm --image <registry url>/<namespace>/<image>:<tag> --order <SAS order> --http-port <port> [--debug, --tls]
+./run_deployment --container-name openmodelmanager --image <registry url>/<namespace>/<image>:<tag> --order <SAS order> --http-port <port> [--debug, --tls]
 
 ```
 
@@ -29,13 +29,13 @@ The command starts the image in detached mode. When the image is started, you ca
 
 ```
 # Look at logs
-docker logs openmm
+docker logs openmodelmanager
 
 # Exec into the container
-docker exec -it openmm bash
+docker exec -it openmodelmanager bash
 
 # Delete the container instance
-docker container rm openmm
+docker container rm openmodelmanager
 ```
 
 Also, a set of volumes will be created for you:
@@ -43,11 +43,11 @@ Also, a set of volumes will be created for you:
 ```
 $ docker volume ls
 DRIVER              VOLUME NAME
-local               casdata-openmm
-local               caspermstore-openmm
-local               consul-openmm
-local               postgres-openmm
-local               sasmmastore-openmm
-local               sasmmsresources-openmm
+local               casdata-openmodelmanager
+local               caspermstore-openmodelmanager
+local               consul-openmodelmanager
+local               postgres-openmodelmanager
+local               sasmmastore-openmodelmanager
+local               sasmmsresources-openmodelmanager
 ```
 After the container is running, return to [SAS Open Model Manager 1.2 for Containers: Deployment Guide](http://documentation.sas.com/?docsetId=dplymdlmgmt0phy0dkr&docsetTarget=titlepage.htm&docsetVersion=1.2&locale=en) for post-instalaltion tasks.
