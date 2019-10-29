@@ -1,14 +1,14 @@
 # Open Model Manager Resources
 
-This repository is used to store start scripts and some samples to use with SAS Open Model Manager.
+This repository contains a start script and some samples to use with SAS Open Model Manager.
 
 For more information about deploying the container, see [SAS Open Model Manager 1.2 for Containers: Deployment Guide](http://documentation.sas.com/?docsetId=dplymdlmgmt0phy0dkr&docsetTarget=titlepage.htm&docsetVersion=1.2&locale=en).
 
 ## Start Script
-The script file under [runOpenMM folder](runOpenMM/) is to help launch SAS Open Model Manager smoothly.
+The script file under [runOpenMM folder](runOpenMM/) launches SAS Open Model Manager.
 
 ## Addons
-The [addons folder](addons/) conains how-to information for the following tasks:
+The [addons folder](addons/) contains how-to information for the following tasks:
 * install extra Python packages into the SAS Open Model Manager container
 * change the PyMAS configuration in the container
 * turn on debugging for a specific service using the sas-admin CLI
