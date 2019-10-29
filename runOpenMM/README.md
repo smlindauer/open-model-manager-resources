@@ -1,23 +1,23 @@
 # Overview
 
-This directory contains the scripts to launch, debug the Open Model Manager container. 
+This directory contains the scripts to launch and debug the SAS Open Model Manager container. 
 
 # Files
 
-* sitedefault_sample.yml - Sample file for sitedefault.yml which is used to load defaults into Consul.
-* sssd_sample.conf - Sample  for sssd.conf which is used for authenticating users in the container.
+* sitedefault_sample.yml - Sample file for sitedefault.yml which loads defaults into Consul.
+* sssd_sample.conf - Sample for sssd.conf which is used for authenticating users in the container.
 * run_docker_container - Script that will launch the container with the correct settings for the `docker run` command
 
-# Running
+# Deploying the Container
 
-Create sssd.conf and sitedefault.yml files according to sample files;
 
-Copy the license file from software order zip file;
+1.  Create sssd.conf and sitedefault.yml files according to the comments in the sample files.
 
-Prepare the certificates if running in TLS mode. Upload signed CA certificate and named as casigned.crt, 
-upload public key and named as servertls.key. 
+2.  Copy the license file from the zip file attached to your Software Order Email.
 
-Run the run_docker_container, pass in the container name, the image URL, SAS order ID and the port to map to the http port
+3.  If you plan to run in TLS mode, prepare the certificates. Upload the signed CA certificate and name it casigned.crt. Then upload the public key and name itservertls.key. 
+
+4.  Run the run_docker_container script. Use the image URL, the SAS order ID, and the port mapped to the http port in place of the variables in the command below.
 
 ```
 cd deployment
@@ -25,7 +25,7 @@ cd deployment
 
 ```
 
-That will start the image in detached mode. Once that is done you can do
+The command starts the image in detached mode. When the image is started, you can perform the following tasks:
 
 ```
 # Look at logs
@@ -38,7 +38,7 @@ docker exec -it openmm bash
 docker container rm openmm
 ```
 
-Also, a set of volumes will be created for you
+Also, a set of volumes will be created for you:
 
 ```
 $ docker volume ls
@@ -50,4 +50,4 @@ local               postgres-openmm
 local               sasmmastore-openmm
 local               sasmmsresources-openmm
 ```
-
+After the container is running, return to [SAS Open Model Manager 1.2 for Containers: Deployment Guide](http://documentation.sas.com/?docsetId=dplymdlmgmt0phy0dkr&docsetTarget=titlepage.htm&docsetVersion=1.2&locale=en) for post-instalaltion tasks.
