@@ -15,7 +15,7 @@ This directory contains the scripts to launch and debug the SAS Open Model Manag
 
 2.  Copy the license file from the zip file attached to your Software Order Email.
 
-3.  If you plan to run in TLS mode, prepare the certificates. Upload the signed CA certificate and name it casigned.crt. Then upload the public key and name itservertls.key. 
+3.  If you plan to run in TLS mode, prepare the certificates. Upload the signed CA certificate and name it casigned.crt. Then upload the public key and name it servertls.key. 
 
 4.  Run the run_docker_container script. Use the image URL, the SAS order ID, and the port mapped to the http port in place of the variables in the command below.
 
