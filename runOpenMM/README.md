@@ -50,4 +50,4 @@ local               postgres-openmodelmanager
 local               sasmmastore-openmodelmanager
 local               sasmmsresources-openmodelmanager
 ```
-After the container is running, return to [SAS Open Model Manager 1.2 for Containers: Deployment Guide](http://documentation.sas.com/?docsetId=dplymdlmgmt0phy0dkr&docsetTarget=titlepage.htm&docsetVersion=1.2&locale=en) for post-instalaltion tasks.
+After the container is running, return to [SAS Open Model Manager 1.2 for Containers: Deployment Guide](http://documentation.sas.com/?docsetId=dplymdlmgmt0phy0dkr&docsetTarget=titlepage.htm&docsetVersion=1.2&locale=en) for post-installation tasks.
