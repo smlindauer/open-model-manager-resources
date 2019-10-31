@@ -82,8 +82,14 @@ if [[ ! -f ${PWD}/SASViyaV0300_${SAS_ORDER}_Linux_x86-64.txt ]]; then
 fi
 
 if [[ -f ${PWD}/sssd.conf ]]; then
-    chmod -v 0600 sssd.conf
+    sudo chmod -v 0600 sssd.conf
     sudo chown -v root sssd.conf
+    echo
+fi
+
+if [[ -f ${PWD}/sssd.cert ]]; then
+    sudo chmod -v 0600 sssd.cert
+    sudo chown -v root sssd.cert
     echo
 fi
 
@@ -104,7 +110,7 @@ if [[ ${SAS_RUN_TLS} == "true" ]]; then
 fi
 
 echo
-chmod a+rw /var/run/docker.sock
+sudo chmod a+rw /var/run/docker.sock
 
 if [[ ${SAS_RUN_DEBUG} == "true" ]]; then
     docker run \
@@ -116,6 +122,7 @@ if [[ ${SAS_RUN_DEBUG} == "true" ]]; then
         --publish ${SAS_HTTPS_PORT}:6443 \
         --publish-all \
         --mount type=bind,source="${PWD}/sssd.conf",target=/etc/sssd/sssd.conf \
+        --mount type=bind,source="${PWD}/sssd.cert",target=/etc/sssd/sssd.cert \
         --mount type=bind,source="${PWD}/SASViyaV0300_${SAS_ORDER}_Linux_x86-64.txt",target=/opt/sas/viya/config/license.sas \
         --mount type=bind,source="${PWD}/sitedefault.yml",target=/opt/sas/viya/config/etc/consul.d/default/sitedefault.yml \
         --mount type=volume,source=consul-${CONTAINER_NAME},target=/consul/data \
@@ -127,7 +134,7 @@ if [[ ${SAS_RUN_DEBUG} == "true" ]]; then
         ${SAS_TLS_OPTIONS} \
         --hostname modelmanager \
         --name $CONTAINER_NAME \
-        -v /var/run/docker.sock:/var/run/docker.sock
+        -v /var/run/docker.sock:/var/run/docker.sock \
         $SAS_DOCKER_IMAGE /bin/bash -c "while : ; do echo Sleep; sleep 1000; done"
 else
     docker run \
@@ -139,6 +146,7 @@ else
         --publish ${SAS_HTTPS_PORT}:6443 \
         --publish-all \
         --mount type=bind,source="${PWD}/sssd.conf",target=/etc/sssd/sssd.conf \
+        --mount type=bind,source="${PWD}/sssd.cert",target=/etc/sssd/sssd.cert \
         --mount type=bind,source="${PWD}/SASViyaV0300_${SAS_ORDER}_Linux_x86-64.txt",target=/opt/sas/viya/config/license.sas \
         --mount type=bind,source="${PWD}/sitedefault.yml",target=/opt/sas/viya/config/etc/consul.d/default/sitedefault.yml \
         --mount type=volume,source=consul-${CONTAINER_NAME},target=/consul/data \
@@ -150,7 +158,7 @@ else
         ${SAS_TLS_OPTIONS} \
         --hostname modelmanager \
         --name $CONTAINER_NAME \
-        -v /var/run/docker.sock:/var/run/docker.sock
+        -v /var/run/docker.sock:/var/run/docker.sock \
         $SAS_DOCKER_IMAGE
 fi
 echo
