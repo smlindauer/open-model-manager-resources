@@ -110,7 +110,7 @@ if [[ ${SAS_RUN_TLS} == "true" ]]; then
 fi
 
 echo
-sudo chmod a+rw /var/run/docker.sock
+DockerGID=$(cut -d: -f3 < <(getent group docker))
 
 if [[ ${SAS_RUN_DEBUG} == "true" ]]; then
     docker run \
@@ -135,6 +135,7 @@ if [[ ${SAS_RUN_DEBUG} == "true" ]]; then
         --hostname modelmanager \
         --name $CONTAINER_NAME \
         -v /var/run/docker.sock:/var/run/docker.sock \
+        --group-add ${DockerGID} \
         $SAS_DOCKER_IMAGE /bin/bash -c "while : ; do echo Sleep; sleep 1000; done"
 else
     docker run \
@@ -159,6 +160,7 @@ else
         --hostname modelmanager \
         --name $CONTAINER_NAME \
         -v /var/run/docker.sock:/var/run/docker.sock \
+        --group-add ${DockerGID} \
         $SAS_DOCKER_IMAGE
 fi
 echo
