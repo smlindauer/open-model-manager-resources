@@ -83,13 +83,13 @@ fi
 
 if [[ -f ${PWD}/sssd.conf ]]; then
     sudo chmod -v 0600 sssd.conf
-    sudo chown -v root sssd.conf
+    sudo chown -v root:root sssd.conf
     echo
 fi
 
 if [[ -f ${PWD}/sssd.cert ]]; then
     sudo chmod -v 0600 sssd.cert
-    sudo chown -v root sssd.cert
+    sudo chown -v root:root sssd.cert
     echo
 fi
 
