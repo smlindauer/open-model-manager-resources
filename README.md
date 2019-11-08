@@ -19,4 +19,4 @@ The [addons folder](addons/) contains how-to information for the following tasks
 The [samples folder](samples/) contains two sample models for Python and R.  
 
 ## Tutorials
-The [tutorials folder](tutorials/) contains examples for how to...
+The [tutorials folder](tutorials/) contains examples for how to prepare a modeling script for model containerization.
