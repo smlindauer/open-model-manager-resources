@@ -1,9 +1,9 @@
 #!/bin/bash -e
 #set -x
 
-# Allow running only `./create_deployment` to show --help output
+# Allow running only `./run_docker_container` to show --help output
 function usage() {
-    echo "Example: ./run_deployment --container-name openmm --image <registry url>/<namespace>/<image>:<tag> --order <SAS order> --http-port <port> [--debug, --tls]"
+    echo "Example: ./run_docker_container --container-name openmm --image <registry URL>/<namespace>/<image>:<tag> --order <SAS order> [--http-port <port>  | --https-port <port>] [--debug, --tls]"
 }
 
 if [ $# -eq 0 ] ; then
