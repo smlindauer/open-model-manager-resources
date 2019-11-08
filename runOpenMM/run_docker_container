@@ -81,20 +81,26 @@ if [[ ! -f ${PWD}/SASViyaV0300_${SAS_ORDER}_Linux_x86-64.txt ]]; then
     exit 1
 fi
 
+SAS_SSSD_CONF_OPTION=""
 if [[ -f ${PWD}/sssd.conf ]]; then
     sudo chmod -v 0600 sssd.conf
     sudo chown -v root:root sssd.conf
+    SAS_SSSD_CONF_OPTION="--mount type=bind,source=${PWD}/sssd.conf,target=/etc/sssd/sssd.conf"
     echo
 fi
 
+SAS_SSSD_CERT_OPTION=""
 if [[ -f ${PWD}/sssd.cert ]]; then
     sudo chmod -v 0600 sssd.cert
     sudo chown -v root:root sssd.cert
+    SAS_SSSD_CERT_OPTION="--mount type=bind,source=${PWD}/sssd.cert,target=/etc/sssd/sssd.cert"
     echo
 fi
 
+SAS_SITEDEFAULT_OPTION=""
 if [[ -f ${PWD}/sitedefault.yml ]]; then
     sudo chown -v 1001:1001 sitedefault.yml
+    SAS_SITEDEFAULT_OPTION="--mount type=bind,source=${PWD}/sitedefault.yml,target=/opt/sas/viya/config/etc/consul.d/default/sitedefault.yml"
     echo
 fi
 
@@ -121,10 +127,10 @@ if [[ ${SAS_RUN_DEBUG} == "true" ]]; then
         --publish ${SAS_HTTP_PORT}:8080 \
         --publish ${SAS_HTTPS_PORT}:6443 \
         --publish-all \
-        --mount type=bind,source="${PWD}/sssd.conf",target=/etc/sssd/sssd.conf \
-        --mount type=bind,source="${PWD}/sssd.cert",target=/etc/sssd/sssd.cert \
+        ${SAS_SSSD_CONF_OPTION} \
+        ${SAS_SSSD_CERT_OPTION} \
+        ${SAS_SITEDEFAULT_OPTION} \
         --mount type=bind,source="${PWD}/SASViyaV0300_${SAS_ORDER}_Linux_x86-64.txt",target=/opt/sas/viya/config/license.sas \
-        --mount type=bind,source="${PWD}/sitedefault.yml",target=/opt/sas/viya/config/etc/consul.d/default/sitedefault.yml \
         --mount type=volume,source=consul-${CONTAINER_NAME},target=/consul/data \
         --mount type=volume,source=postgres-${CONTAINER_NAME},target=/database/data \
         --mount type=volume,source=caspermstore-${CONTAINER_NAME},target=/cas/permstore \
@@ -146,10 +152,10 @@ else
         --publish ${SAS_HTTP_PORT}:8080 \
         --publish ${SAS_HTTPS_PORT}:6443 \
         --publish-all \
-        --mount type=bind,source="${PWD}/sssd.conf",target=/etc/sssd/sssd.conf \
-        --mount type=bind,source="${PWD}/sssd.cert",target=/etc/sssd/sssd.cert \
+        ${SAS_SSSD_CONF_OPTION} \
+        ${SAS_SSSD_CERT_OPTION} \
+        ${SAS_SITEDEFAULT_OPTION} \
         --mount type=bind,source="${PWD}/SASViyaV0300_${SAS_ORDER}_Linux_x86-64.txt",target=/opt/sas/viya/config/license.sas \
-        --mount type=bind,source="${PWD}/sitedefault.yml",target=/opt/sas/viya/config/etc/consul.d/default/sitedefault.yml \
         --mount type=volume,source=consul-${CONTAINER_NAME},target=/consul/data \
         --mount type=volume,source=postgres-${CONTAINER_NAME},target=/database/data \
         --mount type=volume,source=caspermstore-${CONTAINER_NAME},target=/cas/permstore \
