@@ -30,7 +30,7 @@ chmod +x run_docker_container
 
 ```
 cd <the directory where you saved the run_docker_container file>
-./run_docker_container --container-name openmodelmanager --image <registry URL>/<namespace>/<image>:<tag> --order <SAS order> --http-port <port> --https-port <port> [--debug, --tls]
+./run_docker_container --container-name openmodelmanager --image <registry URL>/<namespace>/<image>:<tag> --order <SAS order> [--http-port <port>|--https-port <port>] [--debug, --tls]
 
 ```
 
