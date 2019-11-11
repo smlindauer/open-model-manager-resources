@@ -13,7 +13,7 @@ When a container instance is running, Python 3 has been installed using the sas 
 
 Login to the container instance as the sas user:
 ```
-docker exec -it openmm bash
+docker exec -it openmodelmanager bash
 ```
 Use pip3 to install Python packages, such as:
 ```
@@ -27,7 +27,7 @@ For more information, see [SAS Micro Analytic Service 5.4: Programming and Admin
 
 Login into container instance as the sas user.
 ```
-docker exec -it openmm bash
+docker exec -it openmodelmanager bash
 ```
 
 Create and edit the following files, if they do not already exist:

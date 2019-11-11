@@ -3,7 +3,7 @@
 
 # Allow running only `./run_docker_container` to show --help output
 function usage() {
-    echo "Example: ./run_docker_container --container-name openmm --image <registry URL>/<namespace>/<image>:<tag> --order <SAS order> [--http-port <port>  | --https-port <port>] [--debug, --tls]"
+    echo "Example: ./run_docker_container --container-name openmodelmanager --image <registry URL>/<namespace>/<image>:<tag> --order <SAS order> [--http-port <port>  | --https-port <port>] [--debug, --tls]"
 }
 
 if [ $# -eq 0 ] ; then
@@ -63,7 +63,7 @@ while [[ $# -gt 0 ]]; do
     esac
 done
 
-[[ -z ${CONTAINER_NAME+x} ]] && CONTAINER_NAME=openmm
+[[ -z ${CONTAINER_NAME+x} ]] && CONTAINER_NAME=openmodelmanager
 [[ -z ${SAS_HTTP_PORT+x} ]]  && SAS_HTTP_PORT=8080
 [[ -z ${SAS_HTTPS_PORT+x} ]] && SAS_HTTPS_PORT=443
 
