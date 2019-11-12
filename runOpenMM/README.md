@@ -71,3 +71,8 @@ local               sasmmastore-openmodelmanager
 local               sasmmsresources-openmodelmanager
 ```
 After the container is running, return to [SAS Open Model Manager 1.2 for Containers: Deployment Guide](http://documentation.sas.com/?docsetId=dplymdlmgmt0phy0dkr&docsetTarget=titlepage.htm&docsetVersion=1.2&locale=en) for information required to complete your initial deployment.
+
+# License
+
+This project is licensed under the [Apache 2.0 License](../LICENSE).
+

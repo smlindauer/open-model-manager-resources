@@ -20,3 +20,8 @@ The [samples folder](samples/) contains two sample models for Python and R.
 
 ## Tutorials
 The [tutorials folder](tutorials/) contains examples for how to prepare a modeling script for model containerization.
+
+## License
+
+This project is licensed under the [Apache 2.0 License](LICENSE).
+

@@ -215,3 +215,9 @@ mm_outds <- cbind(inputdata, score)
 write.csv(mm_outds, file = outputfile, row.names=F)
 
 ```
+
+
+## License
+
+This project is licensed under the [Apache 2.0 License](../LICENSE).
+

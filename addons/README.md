@@ -117,3 +117,8 @@ It might take longer to create an R base image, so in the script we use asynchro
 python create_r_destination.py
 ```
 
+
+## License
+
+This project is licensed under the [Apache 2.0 License](../LICENSE).
+
