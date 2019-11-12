@@ -85,7 +85,18 @@ Two more things to be done before user is able to publish Python or R model to m
 ### Create Publishing Destinations
 Three Python scripts can help users to create new destinations for types of cas, aws, and privateDocker.
 
+<b>Make sure that you have Python3 with requests package installed in the machine where you are going to run the scripts</b>
+
+To install Python 3 in the machine:
+```
+sudo yum install -y python3
+sudo pip3 install requests
+```
+
 <b>Make sure that you modify the SAS account, AWS access key information, or private docker information in the script before execution. </b>
+
+If Python 3 executable filename is 'python3', please the update the commands below to use 'python3' instead of 'python'.
+
 ```
 python create_cas_destination.py
 python create_aws_destination.py
@@ -100,7 +111,9 @@ Here are the types of model base images that are currently supported:
 * Python 3 base image is used for scoring Python 3 models
 * R base image is used for scoring R models
 
-<b>Before running the scripts, make sure that you modify the script and fill in proper user name, password and specify the destination name.</b> 
+<b>Before running the scripts, make sure that 
+* you have Python3 with requests package installed in the machine where you are going to run the scripts (see last section);
+* you modify the script and fill in proper user name, password and specify the destination name.</b> 
 
 #### Create Python 3 Base Image
 In the script we use synchronous publish mode to generate Python base images. Please wait until it returns a result.

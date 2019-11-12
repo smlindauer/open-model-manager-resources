@@ -47,13 +47,13 @@ model_publishing_async_headers = {
     mmAuthorization.AUTHORIZATION_HEADER: mmAuthorization.AUTHORIZATION_TOKEN + auth_token
 }
 
-# # 3) Asynchronous create r base-image
+# # Asynchronous create r base-image
 # # The API call will NOT wait for baseImage being fully created and pushed
 # # Instead user has to pull the published model object to check the state every awhile
 # # The 'imageUrl' property will be showed in the returned body of the published model object
 
 
-# 3) R base-image
+# R base-image
 # two required fields: 
 # - name: 'r'
 # - modelId: must be 'base'
