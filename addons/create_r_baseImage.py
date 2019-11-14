@@ -1,5 +1,5 @@
 #
-# Copyright © 2019, SAS Institute Inc., Cary, NC, USA.  All Rights Reserved.
+# Copyright (c) 2019, SAS Institute Inc., Cary, NC, USA.  All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,8 +19,9 @@ import requests
 import time
 import json, os, pprint
 
-public_ip = "localhost"
-host_url="http://" + public_ip + ":8080"
+viya_host = "localhost"
+port = ":8080"
+host_url="http://" + viya_host + port
 publishmodel_url = host_url + "/modelPublish/models"
 
 mm_auth = mmAuthorization.mmAuthorization("myAuth")
