@@ -119,7 +119,14 @@ if [[ ${SAS_RUN_TLS} == "true" ]]; then
 fi
 
 echo
-DockerGID=$(cut -d: -f3 < <(getent group docker))
+#regular docker socket from host
+HOST_DOCKER_SOCKET=/var/run/docker.sock
+
+DockerGID=$(ls -anl $HOST_DOCKER_SOCKET | awk '{print $4}')
+#echo $DockerGID
+
+SAS_DOCKER_SOCKET="-v $HOST_DOCKER_SOCKET:/var/run/docker.sock --group-add ${DockerGID}"
+
 
 if [[ ${SAS_RUN_DEBUG} == "true" ]]; then
     docker run \
@@ -143,8 +150,7 @@ if [[ ${SAS_RUN_DEBUG} == "true" ]]; then
         ${SAS_TLS_OPTIONS} \
         --hostname modelmanager \
         --name $CONTAINER_NAME \
-        -v /var/run/docker.sock:/var/run/docker.sock \
-        --group-add ${DockerGID} \
+        $SAS_DOCKER_SOCKET \
         $SAS_DOCKER_IMAGE /bin/bash -c "while : ; do echo Sleep; sleep 1000; done"
 else
     docker run \
@@ -168,8 +174,7 @@ else
         ${SAS_TLS_OPTIONS} \
         --hostname modelmanager \
         --name $CONTAINER_NAME \
-        -v /var/run/docker.sock:/var/run/docker.sock \
-        --group-add ${DockerGID} \
+        $SAS_DOCKER_SOCKET \
         $SAS_DOCKER_IMAGE
 fi
 echo
