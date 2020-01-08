@@ -122,6 +122,9 @@ echo
 #regular docker socket from host
 HOST_DOCKER_SOCKET=/var/run/docker.sock
 
+#rootless docker socket from host
+#HOST_DOCKER_SOCKET=$XDG_RUNTIME_DIR/docker.sock
+
 DockerGID=$(ls -anl $HOST_DOCKER_SOCKET | awk '{print $4}')
 #echo $DockerGID
 
