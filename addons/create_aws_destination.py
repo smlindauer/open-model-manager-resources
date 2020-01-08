@@ -25,8 +25,22 @@ destination_url = host_url + "/modelPublish/destinations/"
 
 mm_auth = mmAuthorization.mmAuthorization("myAuth")
 
+# admin user id and password
 admin_userId = "SAS_USER_ADMIN_ID"
 user_passwd = "SAS_USER_PASSWD"
+
+# the domain which the SAS Credential Service stores AWS credentials
+DOMAIN_NAME = "Domain Name"
+
+# the kubernetes cluster name
+K8S_NAME = "K8s Name"
+
+# destination name
+dest_name = "MY_AWS_DEST_NAME"
+
+if K8S_NAME == "K8s Name":
+    print("Please replace the values in the script with real ones before executing the script!")
+    exit(1)
 
 admin_auth_token = mm_auth.get_auth_token(host_url, admin_userId, user_passwd)
 
@@ -41,20 +55,17 @@ destination_aws_headers = {
 }
 
 # create new destination, expecting 201
-dest_name = "AWS"
 print("Creating " + dest_name + " destination...")
 
 destination_attrs = {
     "name":dest_name,
     "destinationType":"aws",
-     "properties": [{"name": "accessKeyId",                
-                 "value": "MY_AWS_KEY_ID"},
-                {"name": "secretAccessKey",                 
-                 "value": "MY_AWS_ACCESS_KEY"},
+     "properties": [{"name": "domainId",                
+                 "value": DOMAIN_NAME},
                 {"name": "region",                 
                  "value": "us-east-1"},
                 {"name": "kubernetesCluster",                 
-                 "value": "MY_EKS_NAME"}
+                 "value": K8S_NAME}
                    ]
 }
 

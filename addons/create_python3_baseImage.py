@@ -30,6 +30,10 @@ user_passwd = "SAS_USER_PASSWD"
 
 dest_name = "MY_DEST_NAME"
 
+if user_id == "SAS_USER_ID":
+    print("Please replace the values in the script with real ones before executing the script!")
+    exit(1)
+
 auth_token = mm_auth.get_auth_token(host_url, user_id, user_passwd)
 
 model_get_headers = {
