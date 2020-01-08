@@ -107,7 +107,6 @@ python create_privatedocker_destination.py
 ### Create Base Images
 Here are the types of model base images that are currently supported:
 
-* Python 2 base image is used for scoring Python 2 models
 * Python 3 base image is used for scoring Python 3 models
 * R base image is used for scoring R models
 
@@ -119,10 +118,6 @@ Here are the types of model base images that are currently supported:
 In the script we use synchronous publish mode to generate Python base images. Please wait until it returns a result.
 ```
 python create_python3_destination.py
-```
-#### Create Python 2 Base Image
-```
-python create_python2_destination.py
 ```
 #### Create Python R Base Image
 It might take longer to create an R base image, so in the script we use asynchronous publish.
