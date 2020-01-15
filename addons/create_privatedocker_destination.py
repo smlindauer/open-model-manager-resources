@@ -35,11 +35,11 @@ dest_name = "MY_PRIVATE_DOCKER_DEST_NAME"
 # docker repository base url
 BASE_REPO_URL = "xx.xx.xx.xx"   # or "xx.xx.xx.xx/xxx"
 
-# docker daemon socket url
-DOCKER_HOST_URL = "" # using unix socket on default
+# the docker daemon is running on tcp socket
+DOCKER_HOST_URL = "tcp://yy.yy.yy.yy:2375"
 
-# uncomment the line below if the docker daemon is running on tcp socket
-# DOCKER_HOST_URL = "tcp://yy.yy.yy.yy:2375"
+# uncomment the line below if the docker daemon is running on Unix socket
+# DOCKER_HOST_URL = "" 
 
 if admin_userId == "SAS_USER_ADMIN_ID":
     print("Please replace the values in the script with real ones before executing the script!")

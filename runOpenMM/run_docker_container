@@ -126,7 +126,6 @@ HOST_DOCKER_SOCKET=/var/run/docker.sock
 #HOST_DOCKER_SOCKET=$XDG_RUNTIME_DIR/docker.sock
 
 DockerGID=$(ls -anl $HOST_DOCKER_SOCKET | awk '{print $4}')
-#echo $DockerGID
 
 SAS_DOCKER_SOCKET="-v $HOST_DOCKER_SOCKET:/var/run/docker.sock --group-add ${DockerGID}"
 
@@ -153,7 +152,6 @@ if [[ ${SAS_RUN_DEBUG} == "true" ]]; then
         ${SAS_TLS_OPTIONS} \
         --hostname modelmanager \
         --name $CONTAINER_NAME \
-        $SAS_DOCKER_SOCKET \
         $SAS_DOCKER_IMAGE /bin/bash -c "while : ; do echo Sleep; sleep 1000; done"
 else
     docker run \
@@ -177,7 +175,6 @@ else
         ${SAS_TLS_OPTIONS} \
         --hostname modelmanager \
         --name $CONTAINER_NAME \
-        $SAS_DOCKER_SOCKET \
         $SAS_DOCKER_IMAGE
 fi
 echo
