@@ -21,7 +21,13 @@ The [samples folder](samples/) contains two sample models for Python and R.
 ## Tutorials
 The [tutorials folder](tutorials/) contains examples for how to prepare scoring scripts for model containerization.
 
+## Contributing
+We welcome your contributions! Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on how to submit contributions to this project.
+
 ## License
 
 This project is licensed under the [Apache 2.0 License](LICENSE).
+
+## Additional Resources
+TODO getting official URL of OMM from technical writers.
 

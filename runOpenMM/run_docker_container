@@ -118,16 +118,12 @@ if [[ ${SAS_RUN_TLS} == "true" ]]; then
     SAS_TLS_OPTIONS="--mount type=bind,source=${PWD}/casigned.crt,target=/etc/pki/tls/certs/localhost.crt --mount type=bind,source=${PWD}/servertls.key,target=/etc/pki/tls/private/localhost.key --env SSL_CERT_NAME=localhost.crt --env SSL_KEY_NAME=localhost.key"
 fi
 
-echo
 #regular docker socket from host
-HOST_DOCKER_SOCKET=/var/run/docker.sock
-
+#HOST_DOCKER_SOCKET=/var/run/docker.sock
 #rootless docker socket from host
 #HOST_DOCKER_SOCKET=$XDG_RUNTIME_DIR/docker.sock
-
-DockerGID=$(ls -anl $HOST_DOCKER_SOCKET | awk '{print $4}')
-
-SAS_DOCKER_SOCKET="-v $HOST_DOCKER_SOCKET:/var/run/docker.sock --group-add ${DockerGID}"
+#DockerGID=$(ls -anl $HOST_DOCKER_SOCKET | awk '{print $4}')
+#SAS_DOCKER_SOCKET="-v $HOST_DOCKER_SOCKET:/var/run/docker.sock --group-add ${DockerGID}"
 
 
 if [[ ${SAS_RUN_DEBUG} == "true" ]]; then
