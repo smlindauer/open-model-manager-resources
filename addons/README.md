@@ -1,11 +1,11 @@
 # Overview
 
-This directory contains the instructions to perform various tasks in SAS Open Model Manager container:
+This directory contains the instructions to perform various tasks in the SAS Open Model Manager container:
 
-* install extra Python packages into the Open MM container
+* install extra Python packages into the Open Model Manager container
 * change PyMAS configuration in the container
-* turn on logging debug for a specific service using sas-admin util
-* create container base images for Python2, Python3 and R models with Python script
+* turn on logging debug for a specific service using sas-admin CLI utility
+* create container base images for Python2, Python 3 and R models with a Python script
 * create Amazon Web Services (AWS) and Private Docker publising destinations with a Python script
 
 ## Extra Python packages
@@ -25,7 +25,7 @@ pip3 install --user h2o
 In order to use a PyMAS Package. You must configure the Compute Server and CAS Server. 
 For more information, see [SAS Micro Analytic Service 5.4: Programming and Administration Guide](https://documentation.sas.com/?docsetId=masag&docsetTarget=titlepage.htm&docsetVersion=5.4&locale=en).
 
-Login into container instance as the sas user.
+Login to the container instance as the sas user.
 ```
 docker exec -it openmodelmanager bash
 ```
@@ -46,10 +46,10 @@ export MAS_PYPATH
 ```
 
 ## Turn on Logging to Debug with the sas-admin CLI
-Occasionally user would like to get more debug information from log file when troubleshoot certain situation. 
-The SAS Administration (sas-admin) Command Line Interface (CLI) could easily set logging level for specific SAS services in CLI.
-User can download it at [download site at SAS Support](https://support.sas.com/downloads/package.htm?pid=2133).
-The following steps illustrate how to turn on DEBUG level on SAS Model Publish service.
+Occasionally a user would like to get more debugging information from a log file when troubleshooting certain situations. 
+The SAS Administration (sas-admin) Command Line Interface (CLI) could easily set the logging level for specific SAS services in the CLI.
+Users can download the sas-admin CLI from the [SAS Support Downloads site](https://support.sas.com/downloads/package.htm?pid=2133).
+The following steps illustrate how to turn on the DEBUG level for the Model Publish API service.
 * Download and extract sas-admin;
 * Create a json file (such as modelpublish_debug.json) in the same directory as:
 ```
@@ -78,24 +78,24 @@ The following steps illustrate how to turn on DEBUG level on SAS Model Publish s
 ```
 
 ## Model Containerization
-Since SAS Viya 15.3, we start supporting model containerization for Python and R models. 
-Two more things to be done before user is able to publish Python or R model to model container image.
+With the release of SAS Model Manager 15.3 on SAS Viya 3.5, Model containerization for Python and R models is supported. 
+Two additional taks must be done before a user is able to publish Python or R models to a model container image.
 
 
 ### Create Publishing Destinations
-Three Python scripts can help users to create new destinations for types of cas, aws, and privateDocker.
+You can use these Python scripts to create new publishing destinations for types of CAS, Amazon Web Services (AWS), and Private Docker.
 
-<b>Make sure that you have Python3 with requests package installed in the machine where you are going to run the scripts</b>
+<b>Make sure that you have Python 3 with the requests package installed in the machine where you are going to run the scripts.</b>
 
-To install Python 3 in the machine:
+Here is an example of using yum to install Python 3 on a machine:
 ```
 sudo yum install -y python3
 sudo pip3 install requests
 ```
 
-<b>Make sure that you modify the SAS account, AWS access key information, or private docker information in the script before execution. </b>
+<b>Make sure that you modify the host URL (viya_host and port), SAS account, AWS access key information, or private docker information in the script before you run them. </b>
 
-If Python 3 executable filename is 'python3', please the update the commands below to use 'python3' instead of 'python'.
+If Python 3 executable file name is 'python3', then update the following commands to use 'python3', instead of 'python'.
 
 ```
 python create_cas_destination.py
@@ -110,17 +110,17 @@ Here are the types of model base images that are currently supported:
 * Python 3 base image is used for scoring Python 3 models
 * R base image is used for scoring R models
 
-<b>Before running the scripts, make sure that 
-* you have Python3 with requests package installed in the machine where you are going to run the scripts (see last section);
-* you modify the script and fill in proper user name, password and specify the destination name.</b> 
+<b>Before running the scripts, verify the following configurations:</b>
+* Python 3 is installed with the requests package on the machine where you are going to run the scripts.
+* Modify the Python script and specify the proper user name, password, and destination name. 
 
 #### Create Python 3 Base Image
-In the script we use synchronous publish mode to generate Python base images. Please wait until it returns a result.
+In this script we use synchronous publish mode to generate Python base images. Please wait until it returns a result.
 ```
 python create_python3_destination.py
 ```
 #### Create Python R Base Image
-It might take longer to create an R base image, so in the script we use asynchronous publish.
+It might take longer to create an R base image, so in this script we use asynchronous publish.
 ```
 python create_r_destination.py
 ```
