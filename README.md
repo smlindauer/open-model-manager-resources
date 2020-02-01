@@ -1,6 +1,11 @@
+#Overview
+
+Open Model Manager is a new version of SAS Model Manager for data analysts using open-source modeling languages such as Python and R. Open Model Manager is a new tool to make it easy for open-source modelers to operationalize their models. In a single web-app you can manage your full model lifecycle: development, deployment, and monitoring.
+The content on this site is available for users of Open Model Manager, it provides scripts and sample code that will make it easier to use Open Model Manager. It is also hoped that the community of users will use this page to share ideas, code, and models.
+
 # Open Model Manager Resources
 
-This repository contains a start script and some samples to use with SAS Open Model Manager.
+This repository contains the start-up script for Open Model Manager as well as files associated with the Quick-Start Tutorial. In addition there are helper scripts for administration and customization, sample models and data, and user contributed content that 
 
 For more information about deploying the container, see [SAS Open Model Manager 1.2 for Containers: Deployment Guide](http://documentation.sas.com/?docsetId=dplymdlmgmt0phy0dkr&docsetTarget=titlepage.htm&docsetVersion=1.2&locale=en).
 
@@ -16,10 +21,10 @@ The [addons folder](addons/) contains how-to information for the following tasks
 * create container base images for Python2, Python3 and R models using a Python script
 
 ## Samples
-The [samples folder](samples/) contains two sample models for Python and R.  
+The [samples folder](samples/) contains sample models for Python and R language models.  
 
 ## Tutorials
-The [tutorials folder](tutorials/) contains examples for how to prepare scoring scripts for model containerization.
+The [tutorials folder](tutorials/) contains example models, data, and scripts associated with the Model Manager Quick-Start Tutorial.
 
 ## Contributing
 We welcome your contributions! Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on how to submit contributions to this project.
