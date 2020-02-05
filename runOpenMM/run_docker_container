@@ -32,6 +32,11 @@ while [[ $# -gt 0 ]]; do
             SAS_DOCKER_IMAGE="$1"
             shift # past value
             ;;
+        -l|--lang)
+            shift # past argument
+            SAS_LANG="$1"
+            shift # past value
+            ;;
         -o|--order)
             shift # past argument
             SAS_ORDER="$1"
@@ -67,6 +72,7 @@ while [[ $# -gt 0 ]]; do
 done
 
 [[ -z ${CONTAINER_NAME+x} ]] && CONTAINER_NAME=openmodelmanager
+[[ -z ${SAS_LANG+x} ]] && SAS_LANG=en_US.UTF-8
 [[ -z ${SAS_HTTP_PORT+x} ]]  && SAS_HTTP_PORT=8080
 [[ -z ${SAS_HTTPS_PORT+x} ]] && SAS_HTTPS_PORT=443
 
@@ -135,6 +141,7 @@ if [[ ${SAS_RUN_DEBUG} == "true" ]]; then
         --publish ${SAS_HTTP_PORT}:8080 \
         --publish ${SAS_HTTPS_PORT}:6443 \
         --publish-all \
+        --env LANG=${SAS_LANG} \
         ${SAS_SSSD_CONF_OPTION} \
         ${SAS_SSSD_CERT_OPTION} \
         ${SAS_SITEDEFAULT_OPTION} \
@@ -158,6 +165,7 @@ else
         --publish ${SAS_HTTP_PORT}:8080 \
         --publish ${SAS_HTTPS_PORT}:6443 \
         --publish-all \
+        --env LANG=${SAS_LANG} \
         ${SAS_SSSD_CONF_OPTION} \
         ${SAS_SSSD_CERT_OPTION} \
         ${SAS_SITEDEFAULT_OPTION} \
