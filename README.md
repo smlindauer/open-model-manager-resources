@@ -24,7 +24,7 @@ The [addons folder](addons/) contains how-to information for the following tasks
 The [samples folder](samples/) contains sample models for Python and R language models.  
 
 ## Tutorials
-The [tutorials folder](tutorials/) contains example models, data, and scripts associated with the Model Manager Quick-Start Tutorial.
+The [tutorials folder](examples/) contains example models, data, and scripts associated with the Model Manager Quick-Start Tutorial.
 
 ## Contributing
 We welcome your contributions! Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on how to submit contributions to this project.
