@@ -18,7 +18,7 @@ The [addons folder](addons/) contains how-to information for the following tasks
 * change the PyMAS configuration in the container
 * turn on debugging for a specific service using the sas-admin CLI
 * create a CAS, Amazon Web Services (AWS), or Private Docker publishing destination using a Python script
-* create container base images for Python2, Python3 and R models using a Python script
+* create container base images for Python3 and R models using a Python script
 
 ## Samples
 The [samples folder](samples/) contains sample models for Python and R language models.  

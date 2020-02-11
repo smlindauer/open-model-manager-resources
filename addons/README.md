@@ -5,7 +5,7 @@ This directory contains the instructions to perform various tasks in the SAS Ope
 * install extra Python packages into the Open Model Manager container
 * change PyMAS configuration in the container
 * turn on logging debug for a specific service using sas-admin CLI utility
-* create container base images for Python2, Python 3 and R models with a Python script
+* create container base images for Python 3 and R models with a Python script
 * create Amazon Web Services (AWS) and Private Docker publising destinations with a Python script
 
 ## Extra Python packages
@@ -93,7 +93,12 @@ sudo yum install -y python3
 sudo pip3 install requests
 ```
 
-<b>Make sure that you modify the host URL (viya_host and port), SAS account, AWS access key information, or private docker information in the script before you run them. </b>
+<b>If your destination is AWS, you have to create a credential domain in SAS Credential Service and store the AWS access key information in the credentials. Please modify the host URL (viya_host and port), SAS account, AWS access key information in the script and record the domain name in create_aws_destination.py. </b>
+```
+python create_aws_credential_domain.py
+```
+
+<b>Make sure that you modify the host URL (viya_host and port), SAS account, Domain name, or private docker information in the script before you run them. </b>
 
 If Python 3 executable file name is 'python3', then update the following commands to use 'python3', instead of 'python'.
 
