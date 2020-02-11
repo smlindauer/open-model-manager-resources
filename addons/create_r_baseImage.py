@@ -90,7 +90,7 @@ url = publishmodel_url + "/" + publish_uuid
 
 done = False
 
-while (!done):
+while (not done):
     print("Checking publish status...")
     my_model = requests.get(url, headers=model_get_headers)
     print(my_model)
