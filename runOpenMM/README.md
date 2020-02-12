@@ -4,22 +4,23 @@ This directory contains the scripts to launch and debug the SAS Open Model Manag
 
 # Files
 
-* sitedefault_sample.yml - Sample file for sitedefault.yml which loads defaults into Consul.
-* sssd_sample.conf - Sample for sssd.conf which is used for authenticating users in the container.
-* run_docker_container - Script that will launch the container with the correct settings for the `docker run` command
+* sitedefault_sample.yml - Sample of the sitedefault.yml file, which loads defaults into Consul.
+* sssd_sample.conf - Sample of the sssd.conf file, which is used for authenticating users in the container.
+* run_docker_container - Script that launches the container with the correct settings for the `docker run` command.
 
 # Deploying the Container
 
 
 1.  Retrieve the files for this project in the manner you prefer. Place all the files in the same directory location.
 
-2.  Create sssd.conf and sitedefault.yml files according to the comments in the sample files. Save the files in the same location as the run_docker_container script.
+2.  Create the sssd.conf and sitedefault.yml files according to the comments in the sample files. Save the files in the same location as the run_docker_container script. <br>
+    ***Note:** The SAS administrator can be set in the sitedefault.yml file. See the bottom of the sitedefault_sample.yml file for an example.*
 
 3.  If you have a sssd.cert associated with the sssd.conf file, place it in the same location as the run_docker_container script.
 
-4.  Copy the files in the licenses directory from the uncompressed Software Order Email (SOE) zip file to the same location as the run_docker_container script.
+4.  Copy the files in the licenses directory from the uncompressed Software Order Email (SOE) ZIP file to the same location as the run_docker_container script.
 
-5.  If you plan to run in TLS mode, copy the signed CA certificate and name it casigned.crt. Then copy the public key and name it servertls.key. Save both files in the same location as the run_docker_container script.
+5.  If you plan to run in TLS mode, copy the signed CA certificate and name it casigned.crt, and then copy the public key and name it servertls.key. Save both files in the same location as the run_docker_container script.
 
 6.  Change the permissions of the run_docker_container file:
 ```
