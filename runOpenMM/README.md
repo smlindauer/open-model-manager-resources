@@ -13,10 +13,10 @@ This directory contains the scripts to launch and debug the SAS Open Model Manag
 
 1.  Retrieve the files for this project in the manner you prefer. Place all the files in the same directory location.
 
-2.  Create the sitedefault.yml files according to the comments in the sample file.
+2.  Create the sitedefault.yml files according to the comments in the sample file. <br>
     ***Note:** The SAS administrator can be set in the sitedefault.yml file. See the bottom of the sitedefault_sample.yml file for an example.*
 
-3.  Create the sssd.conf file based on documentation from RedHat: https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/system-level_authentication_guide/sssd
+3.  Create the sssd.conf file based on documentation from RedHat: https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/system-level_authentication_guide/sssd <br>
     ***Note:** SAS recommends that you use  the Red Hat System Security Services Daemon (SSSD) as a security management tool to manage users and groups. Creating accounts in LDAP and then creating matching local accounts for users and for service ownership is not recommended.
 
 4.  Save the sitedefault.yaml and sssd.conf files in the same location as the run_docker_container script.
