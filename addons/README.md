@@ -78,14 +78,14 @@ The following steps illustrate how to turn on the DEBUG level for the Model Publ
 ```
 
 ## Model Containerization
-With the release of SAS Model Manager 15.3 on SAS Viya 3.5, Model containerization for Python and R models is supported. 
-Two additional taks must be done before a user is able to publish Python or R models to a model container image.
+With the release of SAS Open Model Manager 1.2 and SAS Model Manager 15.3 on SAS Viya 3.5, model containerization for Python and R models is supported. 
+Here are the tasks must be done before a user is able to publish Python or R models to a model container image.
 
 
 ### Create Publishing Destinations
 You can use these Python scripts to create new publishing destinations for types of CAS, Amazon Web Services (AWS), and Private Docker.
 
-<b>Make sure that you have Python 3 with the requests package installed in the machine where you are going to run the scripts.</b>
+<b>Make sure that you have Python 3 with the requests package installed on the machine where you are going to run the scripts.</b>
 
 Here is an example of using yum to install Python 3 on a machine:
 ```
@@ -93,7 +93,7 @@ sudo yum install -y python3
 sudo pip3 install requests
 ```
 
-<b>If your destination is AWS, you have to create a credential domain in SAS Credential Service and store the AWS access key information in the credentials. Please modify the host URL (viya_host and port), SAS account, AWS access key information in the script and record the domain name in create_aws_destination.py. </b>
+<b>If your destination is AWS, you have to create a credential domain in SAS Credential Service and store the AWS access key information in the credentials. Please modify the host URL (viya_host and port), SAS account, and AWS access key information in the script, and then enter the domain name in the create_aws_destination.py file. </b>
 ```
 python create_aws_credential_domain.py
 ```
