@@ -22,6 +22,7 @@ This directory contains the scripts to launch and debug the SAS Open Model Manag
 4.  Save the sitedefault.yaml and sssd.conf files in the same location as the run_docker_container script.
 
 5.  If you have a sssd.cert associated with the sssd.conf file, place it in the same location as the run_docker_container script.
+    ***Note:** the sssd certificate file must be named sssd.cert to be applied properly
 
 6.  Copy the files in the licenses directory from the uncompressed Software Order Email (SOE) ZIP file to the same location as the run_docker_container script.
 
