@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Model Management Resources for Open-Source Models
 This repository contains resources that can be used for administration and customizations that help with managing open-source models. In addition, there are sample models and data, and example Jupyter notebooks that can be used to submit API requests for common model management tasks using SAS Model Manager or SAS Open Model Manager.
 
@@ -59,3 +60,7 @@ This project is licensed under the [Apache 2.0 License](LICENSE).
 * [REST API documentation](https://developer.sas.com/apis/rest/DecisionManagement/)
 * [REST API Examples](https://github.com/sassoftware/devsascom-rest-api-samples/tree/master/DecisionManagement)
 
+=======
+# open-model-manager-resources
+This repository contains the start-up script for SAS Open Model Manager, as well as helper scripts for administration and customization.
+>>>>>>> c3b6747 (Initial commit)
