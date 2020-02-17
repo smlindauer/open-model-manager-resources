@@ -46,12 +46,12 @@ export MAS_PYPATH
 ```
 
 ## Turn on Logging to Debug with the sas-admin CLI
-Occasionally a user would like to get more debugging information from a log file when troubleshooting certain situations. 
-The SAS Administration (sas-admin) Command Line Interface (CLI) could easily set the logging level for specific SAS services in the CLI.
+Occasionally a user might like to get more debugging information from a log file when troubleshooting certain situations. 
+The SAS Administration (sas-admin) Command Line Interface (CLI) can be used to easily set the logging level for specific SAS services in the CLI.
 Users can download the sas-admin CLI from the [SAS Support Downloads site](https://support.sas.com/downloads/package.htm?pid=2133).
 The following steps illustrate how to turn on the DEBUG level for the Model Publish API service.
 * Download and extract sas-admin;
-* Create a json file (such as modelpublish_debug.json) in the same directory as:
+* Create a JSON file (such as modelpublish_debug.json) in the same directory:
 ```
 {
     "name": "modelpublish logging level",
@@ -65,7 +65,7 @@ The following steps illustrate how to turn on the DEBUG level for the Model Publ
     }]
 }
 ``` 
-* Get auth token with your user name, password
+* Get auth token with your user name and password
 ```
 ./sas-admin prof set-endpoint http://localhost:8080
 ./sas-admin auth login -u <username> -p <password>
@@ -130,11 +130,14 @@ It might take longer to create an R base image, so in this script we use asynchr
 python create_r_destination.py
 ```
 
+## Administer User Group Identities
+The UserGroupAdmin.ipynb Jupyter notebook includes examples for how to administer user group identities by submitting API requests using Python code.
+
 ## ZIP Python Pickle Model Files
 The Python scripts in the picklezip-mm directory are used to pickle the Python model file, generate the fit statistics, lift and ROC JSON files, and then creates an archive model ZIP file. 
 The model ZIP file can then be imported into the SAS Open Model Manager.
 
-For more information, see the README in the picklezip-mm directory. 
+For more information, see the [README](/picklezip-mm/README.md) in the picklezip-mm directory. 
 
 ## License
 

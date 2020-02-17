@@ -22,11 +22,11 @@ This directory contains the scripts to launch and debug the SAS Open Model Manag
 4.  Save the sitedefault.yaml and sssd.conf files in the same location as the run_docker_container script.
 
 5.  If you have a sssd.cert associated with the sssd.conf file, place it in the same location as the run_docker_container script. <br>
-    ***Note:** The SSSD certificate file must be named sssd.cert to be applied properly.*
+    ***Note:** The SSSD certificate file must be named **sssd.cert** to be applied properly. Also, you must set **ldap_tls_cacert = /etc/sssd/sssd.cert** in the **sssd.conf** file, which is in the same location as the run_docker_container script.*
 
 6.  Copy the files in the licenses directory from the uncompressed Software Order Email (SOE) ZIP file to the same location as the run_docker_container script.
 
-7.  If you plan to run in TLS mode, you must perform the following steps: <br>
+7.  If you plan to run in TLS mode with custom certificates, you must perform the following steps: <br>
     1) Obtain your custom signed CA certificate and public key files.
     2) Copy the CA certificate and public key files to the same location as the run_docker_container script. 
     3) Rename the CA certificate file to casigned.crt. 
@@ -39,6 +39,7 @@ This directory contains the scripts to launch and debug the SAS Open Model Manag
     ```
 
 9. Run the run_docker_container script using the appropriate values for the variables.
+   ***Note:** If you are running in TLS mode, make sure to add the --tls option when running the run_docker_container script.*
 
    ```
    cd <the directory where you saved the run_docker_container file>

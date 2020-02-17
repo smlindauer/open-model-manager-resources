@@ -1,3 +1,5 @@
+# Copyright (c) 2020, SAS Institute Inc., Cary, NC, USA.  All Rights Reserved.
+# SPDX-License-Identifier: Apache-2.0
 
 args = commandArgs(trailingOnly=TRUE)
 if (length(args)<2) {

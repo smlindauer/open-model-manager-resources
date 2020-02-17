@@ -1,16 +1,5 @@
-# Copyright SAS Institute
-#
-#  Licensed under the Apache License, Version 2.0 (the License);
-#  you may not use this file except in compliance with the License.
-#  You may obtain a copy of the License at
-#
-#      http://www.apache.org/licenses/LICENSE-2.0
-#
-#  Unless required by applicable law or agreed to in writing, software
-#  distributed under the License is distributed on an "AS IS" BASIS,
-#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-#  See the License for the specific language governing permissions and
-#  limitations under the License.
+# Copyright (c) 2020, SAS Institute Inc., Cary, NC, USA.  All Rights Reserved.
+# SPDX-License-Identifier: Apache-2.0
 
 
 # %%
@@ -26,22 +15,22 @@ def getFile(fName):
     
 setup(
       name='picklezip-mm',
-      version='0.1-dev',
+      version='1.0',
       description='',
       long_description=getFile('README.md'),
       long_description_content_type='text/markdown',
       author='SAS',
       author_email='support@sas.com',
-      url='./picklezip-mm',
-      license='',
+      license='Apache 2.0',
       packages=find_packages(),
       include_package_data=True,
       install_requires=[
-              'pysftp >= v0.2.9',
+              'scipy >= v1.4.0',
+              'scikit-learn >= v0.22.1',
               'pandas >= v0.25.3'
               ],
       classifiers=[
-              'Development Status :: 1 - Planning Copy',
+              'Development Status :: 5 - Production/Stable',
               'Environment :: Console',
               'Intended Audience :: Science/Research',
               'Programming Language :: Python',
