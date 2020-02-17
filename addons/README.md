@@ -6,7 +6,7 @@ This directory contains the instructions to perform various tasks in the SAS Ope
 * change PyMAS configuration in the container
 * turn on logging debug for a specific service using sas-admin CLI utility
 * create container base images for Python 3 and R models with a Python script
-* create Amazon Web Services (AWS) and Private Docker publising destinations with a Python script
+* create Amazon Web Services (AWS) and Private Docker publishing destinations with a Python script
 
 ## Extra Python packages
 When a container instance is running, Python 3 has been installed using the sas user. A user can also install extra Python packages, if needed.
@@ -130,6 +130,11 @@ It might take longer to create an R base image, so in this script we use asynchr
 python create_r_destination.py
 ```
 
+## ZIP Python Pickle Model Files
+The Python scripts in the picklezip-mm directory are used to pickle the Python model file, generate the fit statistics, lift and ROC JSON files, and then creates an archive model ZIP file. 
+The model ZIP file can then be imported into the SAS Open Model Manager.
+
+For more information, see the README in the picklezip-mm directory. 
 
 ## License
 
