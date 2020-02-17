@@ -38,7 +38,7 @@ This directory contains the scripts to launch and debug the SAS Open Model Manag
     chmod +x run_docker_container
     ```
 
-9. Run the run_docker_container script using the appropriate values for the variables. </br>
+9. Run the run_docker_container script using the appropriate values for the variables. <br>
    ***Note:** If you are running in TLS mode, make sure to add the --tls option when running the run_docker_container script.*
 
    ```
