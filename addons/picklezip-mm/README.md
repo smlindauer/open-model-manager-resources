@@ -1,4 +1,4 @@
-# pickleZip-mm (pzMM) v0.1.dev
+# pickleZip-mm (pzMM) v1.0
 
 ## Overview
 
@@ -21,7 +21,8 @@ Use of this package requires the following:
 * Python version 3+
 * SAS Viya 3.5+ environment and user credentials
 * External Python libraries:
-  * pysftp v0.2.9
+  * scipy v1.4.0
+  * scikit v0.22.1
   * pandas v0.25.3
 
 ## Installation
@@ -32,7 +33,7 @@ In order to install this package, run the following command:
 git clone <SSH or HTTPS>
 ```
 
-Then while in the parent directory `~/picklezip-mm/`:
+Also, when in the parent directory `~/picklezip-mm/`, run the following command:
 
 ```bash
 pip install .
@@ -48,9 +49,8 @@ pip uninstall picklezip-mm
 
 ## Getting Started
 
-The easiest way to get started with the picklezip-mm package is to follow the ImportPythonModel.ipynb notebook in the [examples](./examples) directory. An example dataset (*put location here*) with an importable model ZIP is included in the samples folder (*put location here*).
+The easiest way to get started with the picklezip-mm package is to follow the ImportPythonModel.ipynb notebook in the [examples](./examples) directory. Example data sets and an importable model ZIP file is included in the [samples](./samples/Python_Models/DTree_sklearn_PyPickleModel) directory.
 
-## Licensing
 
 ## License
 
