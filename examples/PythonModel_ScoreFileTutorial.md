@@ -1,8 +1,6 @@
 # How to Fit Your Scoring Script for Python Model Containerization
 
 ## Overview
-As described in the [README](https://github.com/sassoftware/model-container-recipes/blob/master/model-image-cli/README.md) for the Model Container Recipes repository, the command-line interface (CLI) utility sends input test data in CSV format to a running container instance for score execution. 
-
 The Web services in the container store the input CSV file and pass the input file name to your scoring script. Your scoring script must follow a specific pattern. 
 
 In this tutorial, I explain the pattern that you must follow in your scoring script.
