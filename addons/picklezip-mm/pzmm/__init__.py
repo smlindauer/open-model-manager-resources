@@ -9,5 +9,10 @@ __dev__ = True
 from pzmm.pickleModel import PickleModel
 from pzmm.uploadData import ModelImport
 from pzmm.writeJSONFiles import JSONFiles
+<<<<<<< HEAD
 from pzmm.zipModel import ZipModel
 from pzmm.writeScoreCode import ScoreCode
+=======
+from pzmm.writeScoreCode import ScoreCode
+from pzmm.zipModel import ZipModel
+>>>>>>> 7f7206d (initial commit of omm repo)

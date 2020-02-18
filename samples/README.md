@@ -1,5 +1,6 @@
 # Overview
 
+<<<<<<< HEAD
 This directory contains sample data and models for the Python and R programming languages. You can use these samples to perform various tasks
 with SAS Open Model Manager and SAS Model Manager. To begin using the sample data and models, retrieve the files in the manner you prefer and place all of the files in the same directory location.
 
@@ -24,4 +25,7 @@ This project is licensed under the [Apache 2.0 License](../LICENSE).
 ## Additional Resources
 * [SAS Open Model Manager: Help Center documentation](https://documentation.sas.com/?cdcId=openmmcdc&cdcVersion=1.2&docsetId=openmmug&docsetTarget=titlepage.htm&locale=en)
 
+=======
+This directory contains the sample models to demonstrate the usage of the software.
+>>>>>>> 7f7206d (initial commit of omm repo)
 

@@ -163,7 +163,11 @@
       "_GINI_" : null,
       "_GAMMA_" : null,
       "_formattedPartition_" : "           0",
+<<<<<<< HEAD
       "_DataRole_" : "VALIDATE",
+=======
+      "_DataRole_" : "TRAIN",
+>>>>>>> 7f7206d (initial commit of omm repo)
       "_MCE_" : null,
       "_ASE_" : null,
       "_MCLL_" : null,
@@ -173,7 +177,11 @@
       "_TAU_" : null,
       "_KSCut_" : null,
       "_C_" : null,
+<<<<<<< HEAD
       "_PartInd_" : null
+=======
+      "_PartInd_" : "0"
+>>>>>>> 7f7206d (initial commit of omm repo)
     },
     "rowNumber" : 1,
     "header" : null
@@ -184,7 +192,11 @@
       "_GINI_" : null,
       "_GAMMA_" : null,
       "_formattedPartition_" : "           1",
+<<<<<<< HEAD
       "_DataRole_" : "TRAIN",
+=======
+      "_DataRole_" : "TEST",
+>>>>>>> 7f7206d (initial commit of omm repo)
       "_MCE_" : null,
       "_ASE_" : null,
       "_MCLL_" : null,
@@ -194,7 +206,11 @@
       "_TAU_" : null,
       "_KSCut_" : null,
       "_C_" : null,
+<<<<<<< HEAD
       "_PartInd_" : null
+=======
+      "_PartInd_" : "1"
+>>>>>>> 7f7206d (initial commit of omm repo)
     },
     "rowNumber" : 2,
     "header" : null
@@ -205,7 +221,11 @@
       "_GINI_" : null,
       "_GAMMA_" : null,
       "_formattedPartition_" : "           2",
+<<<<<<< HEAD
       "_DataRole_" : "TEST",
+=======
+      "_DataRole_" : "VALIDATE",
+>>>>>>> 7f7206d (initial commit of omm repo)
       "_MCE_" : null,
       "_ASE_" : null,
       "_MCLL_" : null,
@@ -215,7 +235,11 @@
       "_TAU_" : null,
       "_KSCut_" : null,
       "_C_" : null,
+<<<<<<< HEAD
       "_PartInd_" : null
+=======
+      "_PartInd_" : "2"
+>>>>>>> 7f7206d (initial commit of omm repo)
     },
     "rowNumber" : 3,
     "header" : null
@@ -223,4 +247,8 @@
   "version" : 1,
   "xInteger" : false,
   "yInteger" : false
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 7f7206d (initial commit of omm repo)
