@@ -60,5 +60,9 @@ name ends with 'score.R' for an R model. The scoring script must follow the belo
 * The RDA model file must be specified in the command-line arguments to be read by the script
 
 
-This project is licensed under the [Apache 2.0 License](../LICENSE).
+
+This project is licensed under the [Apache 2.0 License](LICENSE).
+
+## Additional Resources
+* [SAS Open Model Manager: Help Center documentation](https://documentation.sas.com/?cdcId=openmmcdc&cdcVersion=1.2&docsetId=openmmug&docsetTarget=titlepage.htm&locale=en)
 
