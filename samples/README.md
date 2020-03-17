@@ -19,7 +19,9 @@ The following sample data and models are available in the [R Models](./R_Models)
 * For a decision tree using an R model, see [DTree_Rmodel](../samples/R_Models/DTree_Rmodel)
 * For a logistical regression using an R model, see [LogisticReg_Rmodel](../samples/R_Models/LogisticReg_Rmodel)
 
-This project is licensed under the [Apache 2.0 License](LICENSE).
+This project is licensed under the [Apache 2.0 License](../LICENSE).
 
 ## Additional Resources
 * [SAS Open Model Manager: Help Center documentation](https://documentation.sas.com/?cdcId=openmmcdc&cdcVersion=1.2&docsetId=openmmug&docsetTarget=titlepage.htm&locale=en)
+
+
