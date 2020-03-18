@@ -204,7 +204,7 @@ class ModelImport():
 #    def uploadPickle(pLocalPath, pRemotePath,
 #                     host, username, password=None, privateKey=None):
 #        #TODO: Remove password from memory as in self.getAccessToken() 
-#        #TODO: Obsoleted after 19w47 builds of model manager
+#        #TODO: Obsoleted after November 2019 builds of SAS Model Manager
 #        '''
 #        Uploads a local pickle file to a SAS Open Model Manager server via sftp. Set the
 #        permission of the pickle file on the server to 777 to allow the score
