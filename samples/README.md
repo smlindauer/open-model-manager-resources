@@ -1,7 +1,7 @@
 # Overview
 
-This directory contains sample models and data for Python and R programming language models. You can use these samples to perform various tasks
-with SAS Open Model Manager. To begin using the sample data and models, retrieve the files in the manner you prefer and place all of the files in the same directory location.
+This directory contains sample data and models for the Python and R programming languages. You can use these samples to perform various tasks
+with SAS Open Model Manager and SAS Model Manager. To begin using the sample data and models, retrieve the files in the manner you prefer and place all of the files in the same directory location.
 
 
 ## Python Models

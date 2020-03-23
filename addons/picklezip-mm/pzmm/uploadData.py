@@ -200,11 +200,11 @@ class ModelImport():
             print('Model import failed: ' +
                   f'A model named {modelPrefix} already exists.')
             print('Please adjust the zip file name appropriately.')
-# DEPRECIATED        
+
+# The following code is obsolete and was deprecated after the November 2019 release.
 #    def uploadPickle(pLocalPath, pRemotePath,
 #                     host, username, password=None, privateKey=None):
-#        #TODO: Remove password from memory as in self.getAccessToken() 
-#        #TODO: Obsoleted after November 2019 builds of SAS Model Manager
+#        TODO: Remove password from memory as in self.getAccessToken()
 #        '''
 #        Uploads a local pickle file to a SAS Open Model Manager server via sftp. Set the
 #        permission of the pickle file on the server to 777 to allow the score

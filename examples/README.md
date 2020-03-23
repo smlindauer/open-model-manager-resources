@@ -6,6 +6,7 @@ This directory contains examples of Jupyter notebooks and Python code that can b
 * Build and import a trained Python model
 * Fit a scoring script for Python model containerization
 * Fit a scoring script for R model containerization
+* Upload data to SAS Cloud Analytics Services (CAS)
 
 
 ## Calculate Fit Statistics, ROC, and Lift, and then Generate JSON Files
@@ -57,7 +58,11 @@ name ends with 'score.R' for an R model. The scoring script must follow the belo
 
 To fit a scoring script for a R model containerization, see [RModel_ScoreFileTutorial.md](./RModel_ScoreFileTutorial.md) in the examples directory.
 
+## Upload Data to the SAS Cloud Analytics Services (CAS)
 
+The SAS Scripting Wrapper for Analytics Transfer (SWAT) package can be used to upload local data to the CAS server. 
+
+To upload data to CAS, see [UploadDataToCAS.ipynb](./UploadDataToCAS.ipynb) in the examples directory.
 
 This project is licensed under the [Apache 2.0 License](../LICENSE).
 
