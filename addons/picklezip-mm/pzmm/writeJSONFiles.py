@@ -155,7 +155,7 @@ class JSONFiles():
             try:
                 modeler = getpass.getuser()
             except OSError:
-                modeler = 'defaultUser'
+                modeler = '<myUserID>'
         
         pythonVersion = sys.version.split(' ', 1)[0]
         
