@@ -5,6 +5,7 @@
 import os
 import sys
 
+import getpass
 import json
 import pandas as pd
 from sklearn import metrics
@@ -99,7 +100,7 @@ class JSONFiles():
     def writeModelPropertiesJSON(self, modelName, modelDesc, targetVariable,
                                  modelType, modelPredictors, targetEvent,
                                  numTargetCategories, eventProbVar=None,
-                                 jPath=os.getcwd(), modeler='defaultUser'):
+                                 jPath=os.getcwd(), modeler=None):
         '''
         Writes a model properties JSON file. The JSON file format is dictated by 
         SAS Open Model Manager stipulations and only eventProbVar can be 'None'.
@@ -126,8 +127,8 @@ class JSONFiles():
             Location for the output JSON file. The default is the current
             working directory.
         modeler : string, optional
-            Modeler name to be displayed in the model properties. The
-            default value is 'defaultUser'.
+            The modeler name to be displayed in the model properties. The
+            default value is None.
             
         Yields
         ---------------
@@ -149,6 +150,12 @@ class JSONFiles():
             
         if eventProbVar is None:
             eventProbVar = 'P_' + targetVariable + targetEvent
+        
+        if modeler is None:
+            try:
+                modeler = getpass.getuser()
+            except OSError:
+                modeler = 'defaultUser'
         
         pythonVersion = sys.version.split(' ', 1)[0]
         
