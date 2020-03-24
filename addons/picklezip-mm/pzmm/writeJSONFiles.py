@@ -150,7 +150,7 @@ class JSONFiles():
             
         if eventProbVar is None:
             eventProbVar = 'P_' + targetVariable + targetEvent
-        
+        # Replace <myUserID> with the user ID of the modeler that created the model.
         if modeler is None:
             try:
                 modeler = getpass.getuser()
