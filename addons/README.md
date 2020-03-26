@@ -1,11 +1,21 @@
 # Overview of Addons
 This directory contains the instructions to perform the following tasks in the SAS Open Model Manager or SAS Model Manager container:
 
+<<<<<<< HEAD
 * install extra Python packages into the SAS Open Model Manager container
 * change PyMAS configuration in the container
 * turn on logging debug for a specific service using sas-admin CLI utility
 * create container base images for Python 3 and R models with a Python script
 * create a CAS, Amazon Web Services (AWS), Azure, or Private Docker publishing destination using a Python script or Jupyter notebook
+=======
+This directory contains the instructions to perform the following tasks in the SAS Open Model Manager container:
+
+* install extra Python packages into the Open Model Manager container
+* change PyMAS configuration in the container
+* turn on logging debug for a specific service using sas-admin CLI utility
+* create container base images for Python 3 and R models with a Python script
+* create Amazon Web Services (AWS) and Private Docker publishing destinations with a Python script
+>>>>>>> 29c7a9f (Updated README content and Python scripts, and added new Jupyter example.)
 * administer user group identities
 * generate and zip Python pickle model files
 
@@ -25,7 +35,14 @@ pip3 install --user h2o
 ## PyMAS Configuration
 In order to use a PyMAS Package. You must configure the Compute server and CAS server. 
 
+<<<<<<< HEAD
 For more information, see the following documentation: 
+=======
+Log in to the container instance as the sas user.
+```
+docker exec -it openmodelmanager bash
+```
+>>>>>>> 29c7a9f (Updated README content and Python scripts, and added new Jupyter example.)
 
 * SAS Viya 3.5: [SAS Micro Analytic Service 5.5: Programming and Administration Guide](https://documentation.sas.com/?docsetId=masag&docsetTarget=titlepage.htm&docsetVersion=5.5).
 * SAS Viya 4: [SAS Micro Analytic Service: Programming and Administration Guide](http://documentation.sas.com/?cdcId=mascdc&cdcVersion=default&docsetId=masag&docsetTarget=titlepage.htm)
@@ -89,10 +106,64 @@ To turn on the DEBUG level for the Model Publish API service:
 ## Model Containerization
 With the release of SAS Open Model Manager 1.2 and SAS Model Manager 15.3 on SAS Viya 3.5, model containerization for Python and R models is supported. 
 You must create a publishing destination and base image before users can publish Python models or R models to a container destination.
+<<<<<<< HEAD
 
 * [Creating publishing destinations](./destinations/README.md)
 * [Creating base images](./base-images/README.md)
 
+=======
+
+
+### Create Publishing Destinations
+You can use the example Python scripts to create new publishing destinations for the following destination types: CAS, Amazon Web Services (AWS), and Private Docker.
+
+Here are the prerequisites for creating a new publishing destination:
+
+* Make sure that you have Python 3 with the requests package installed on the machine where you are going to run the scripts._
+
+Here is an example of using yum to install Python 3 on a machine:
+```
+sudo yum install -y python3
+sudo pip3 install requests
+```
+
+* If your destination type is AWS, you must create a credential domain in SAS Credentials service and store the AWS access key information in the credentials. Please modify the host URL (viya_host and port), SAS account, and AWS access key information in the script, and then enter the domain name in the create_aws_destination.py file.
+```
+python create_aws_credential_domain.py
+```
+
+* Make sure that you modify the host URL (viya_host and port), SAS account, Domain name, or private docker information in the script before you run them.
+
+* If Python 3 executable file name is 'python3', then update the following commands to use 'python3', instead of 'python'.
+
+```
+python create_cas_destination.py
+python create_aws_destination.py
+python create_privatedocker_destination.py
+```
+
+
+### Create Base Images
+Here are the types of model base images that are currently supported:
+
+* Python 3 base image that is used for scoring Python 3 models.
+* R base image that is used for scoring R models.
+
+Before running the scripts, verify the following configurations:
+* Python 3 is installed with the requests package on the machine where you are going to run the scripts.
+* Modify the Python script and specify the proper user name, password, and destination name. 
+
+#### Create a Python 3 Base Image
+In this script we use synchronous publish mode to generate Python base images. Please wait until it returns a result.
+```
+python create_python3_baseImage.py
+```
+#### Create an R Base Image
+It might take longer to create an R base image, so in this script we use asynchronous publish.
+```
+python create_r_baseImage.py
+```
+>>>>>>> 29c7a9f (Updated README content and Python scripts, and added new Jupyter example.)
 
 ## Administer User Group Identities
 The [UserGroupAdmin.ipynb](UserGroupAdmin.ipynb) Jupyter notebook includes examples for how to administer user group identities by submitting API requests using Python code.

@@ -3,23 +3,20 @@
 
 
 # %%
-<<<<<<< HEAD
 from pathlib import Path
 
 import requests
-=======
 import os
 import platform
 
 import requests
-import pysftp
->>>>>>> 7f7206d (initial commit of omm repo)
 import getpass
 import json
 
+import pysftp
+
 # %%
 
-<<<<<<< HEAD
 def getAccessToken(server, username=None, password=None):
     '''
     Retrieves an access token from the host server for further API requests. There
@@ -101,115 +98,45 @@ def getAccessToken(server, username=None, password=None):
     return f'Bearer {authToken}'
 
 
-=======
->>>>>>> 7f7206d (initial commit of omm repo)
 class ModelImport():
     
     def __init__(self, host):
         '''
-<<<<<<< HEAD
         Initializes the ModelImport class with the host location, user name, and password.
-=======
-        Initializes the  ModelImport class with host location, user name, and password.
->>>>>>> 7f7206d (initial commit of omm repo)
         
         Parameters
         ---------------
         host : string
-<<<<<<< HEAD
             Name of the host server with a SAS Open Model Manager or SAS Model Manager installation.
-=======
-            Name of the host server with a SAS Open Model Manager installation.
->>>>>>> 7f7206d (initial commit of omm repo)
         '''
         
         if host[:7] == 'http://':
             host = host[7:]
         self.host = host
         self.server = 'http://' + host
-<<<<<<< HEAD
             
     def findProjectID(self, projectName, authToken):
         '''
         Given a project name, an API request is sent to the Model Repository API to find the
         project ID. If the project ID is not found, it creates a new project and returns
         the project ID for the new project.
-=======
-        
-    def getAccessToken(self):
-        '''
-        Retrieves the access token from the host server for further API requests.
-        Requires user input for user name and password, but does not keep
-        password in memory.
-        
-        Returns
-        ---------------
-        authToken : string
-            Access token from JSON file from the API post request. Used for 
-            further API requests to the host server.
-        '''
-        
-        authURI = '/SASLogon/oauth/token'
-        headersAuth = {
-                'accept': 'application/json',
-                'Content-Type': 'application/x-www-form-urlencoded',
-                'Authorization': 'Basic c2FzLmVjOg=='
-                }
-        authToken = ''
-        username = ''
-        password = ''
-        notAuthenticated = True
-        
-        while notAuthenticated: 
-            username = input('Enter username:')
-            password = getpass.getpass('Enter password for %s:' % username)
-            authBody = ('grant_type=password&username=' + username +
-                        '&password=' + password)
-            authReturn = requests.post(self.server + authURI,
-                                       data=authBody,
-                                       headers=headersAuth)
-            if authReturn.status_code == requests.codes.ok:
-                authToken = authReturn.json()['access_token']
-                notAuthenticated = False
-            else:
-                print('Please enter correct user id and password.')
-        
-        password = ''
-        
-        return f'Bearer {authToken}'
-    
-    def findProjectID(self, projectName, authToken):
-        '''
-        Given a project name, makes an API request to Model Repository API to find the 
-        project ID. If project ID is not found, creates a new project and returns
-        its project ID.
->>>>>>> 7f7206d (initial commit of omm repo)
         
         Parameters
         ---------------
         projectName : string
             Project name for retrieving the project ID.
         authToken : string
-<<<<<<< HEAD
             Access token that is used for API requests.
-=======
-            Access token used for API requests.
->>>>>>> 7f7206d (initial commit of omm repo)
         
         Returns
         ---------------
         projectID : string
-<<<<<<< HEAD
             The universally unique identifier string for a project.
-=======
-            Universally unique identifier string project identifier.
->>>>>>> 7f7206d (initial commit of omm repo)
         '''
         
         headers = {
                 'Origin': self.server,
                 'Authorization': authToken}
-<<<<<<< HEAD
         requestUrl = f'{self.server}/modelRepository/projects?limit=100000'
         projectRequest = requests.get(requestUrl, headers=headers)
         
@@ -221,21 +148,6 @@ class ModelImport():
             return projectID
         else:
             return projectID
-=======
-        projectFilter = f'?filter=eq(name, \'{projectName}\')'
-        requestUrl = f'{self.server}/modelRepository/projects{projectFilter}'
-        projectRequest = requests.get(requestUrl, headers=headers)
-        
-        try:
-            projectID = projectRequest.json()['items'][0]['id']
-        except IndexError:
-            print(f'No project named {projectName} could be found.')
-            print(f'Creating a new project named {projectName}.')
-            projectID = self.createNewProject(projectName, authToken)
-            return projectID
-            
-        return projectID
->>>>>>> 7f7206d (initial commit of omm repo)
 
     def createNewProject(self, projectName, authToken):
         '''
@@ -245,24 +157,14 @@ class ModelImport():
         Parameters
         ---------------
         projectName : string
-<<<<<<< HEAD
             The project name used for retrieving the project ID.
         authToken : string
             The access token that is used for API requests.
-=======
-            Project name for retrieving the project ID.
-        authToken : string
-            Access token used for API requests.      
->>>>>>> 7f7206d (initial commit of omm repo)
         
         Returns
         ---------------
         projectID : string
-<<<<<<< HEAD
             The universally unique identifier string for the project.
-=======
-            Universally unique identifier string project identifier.
->>>>>>> 7f7206d (initial commit of omm repo)
         '''
         
         repositoryHeaders = {'Authorization': authToken}
@@ -283,18 +185,11 @@ class ModelImport():
         return newProject.json()['id']
     
     def importModel(self, modelPrefix, projectID=None,
-<<<<<<< HEAD
                     projectName=None, zPath=Path.cwd(),
                     username=None, password=None):
         '''
         Imports the zipped pickle file and corresponding Python and JSON files into
         the common model repository using the 'import model' API request.
-=======
-                    projectName=None, zPath=os.getcwd()):
-        '''
-        Imports the zipped pickle file and corresponding Python and JSON files into
-        the common model repository using the 'import model' API request. 
->>>>>>> 7f7206d (initial commit of omm repo)
         
         If the project ID is not known, provide the project name and an API
         request searches for the project ID. If a project does not already exist, and you
@@ -304,7 +199,6 @@ class ModelImport():
         Parameters
         ---------------
         modelPrefix : string
-<<<<<<< HEAD
             The variable for the model name that is used when naming the model files
             (i.e. hmeqClassTree + [Score.py || .pickle]).
         projectID : string, optional
@@ -328,24 +222,6 @@ class ModelImport():
             projectID = self.findProjectID(projectName, authToken)
         elif projectID is None and projectName is None:
             projectName = input('Enter a new project name:')
-=======
-            Variable name for the model to be displayed in SAS Open Model Manager
-            (i.e. hmeqClassTree + [Score.py || .pickle]).
-        projectID : string, optional
-            Universally unique identifier string project identifier. The default value is None.
-        projectName : string, optional
-            Project name for retrieving the project ID. The default value is None.
-        zPath : string, optional
-            Location for the archive ZIP file. The default value is the current
-            working directory.
-        '''
-        authToken = self.getAccessToken()
-        
-        if projectID is None and projectName is not None:
-            projectID = self.findProjectID(projectName, authToken)
-        elif projectID is None and projectName is None:
-            projectName = input('Please specify a new project name:')
->>>>>>> 7f7206d (initial commit of omm repo)
             projectID = self.createNewProject(projectName, authToken)
         
         with open(zPath, 'rb') as zFile:
@@ -371,48 +247,9 @@ class ModelImport():
         try:
             modelRequest.raise_for_status()
         except requests.exceptions.HTTPError:
-<<<<<<< HEAD
             print('The model could not be imported: ' +
                   f'A model with the name "{modelPrefix}" already exists.')
             print('Enter a unique file name for the model ZIP file.')
-
-# The following code is obsolete and was deprecated after the November 2019 release.
-#    def uploadPickle(pLocalPath, pRemotePath,
-#                     host, username, password=None, privateKey=None):
-#        TODO: Remove password from memory as in self.getAccessToken()
-#        '''
-#        Uploads a local pickle file to a host server via sftp. Set the
-#        permission of the pickle file on the server to 777 to allow the score
-#        code to use the pickle file.
-#        
-#        Parameters
-#        ---------------
-#        pLocalPath : string
-#            The local path for the pickle file.
-#        pRemotePath : string
-#            The remote path on the server for the pickle file's location.
-#        host : string
-#            The name of the host server to send the pickle file.
-#        username : string
-#            The server login credential user name.
-#        password : string, optional
-#            The password for SFTP connection attempt. The default value is None, in the case
-#            where the user is using an RSA/DSA key pairing.
-#        privateKey : string, optional
-#            The private key location for the RSA/DSA key pairing logins. The default value is
-#            None.
-#        '''
-#        
-#        # convert windows path format to linux path format
-#        if platform.system() == 'Windows':
-#            pRemotePath = ('/' + 
-#                           os.path.normpath(pRemotePath).replace('\\', '/'))
-#        
-#        with pysftp.Connection(host, username=username, password=password,
-#                               private_key=privateKey) as sftp:
-#            sftp.put(pLocalPath, remotepath=pRemotePath)
-#            sftp.chmod(pRemotePath, mode=777)
-=======
             print('Model import failed: ' +
                   f'A model named {modelPrefix} already exists.')
             print('Please adjust the zip file name appropriately.')
@@ -453,4 +290,3 @@ class ModelImport():
                                private_key=privateKey) as sftp:
             sftp.put(pLocalPath, remotepath=pRemotePath)
             sftp.chmod(pRemotePath, mode=777)
->>>>>>> 7f7206d (initial commit of omm repo)

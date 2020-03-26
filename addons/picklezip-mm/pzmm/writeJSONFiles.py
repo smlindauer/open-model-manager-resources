@@ -2,16 +2,12 @@
 # SPDX-License-Identifier: Apache-2.0
 
 # %%
-<<<<<<< HEAD
 from pathlib import Path
 import sys
 
 import getpass
-=======
 import os
-import sys
 
->>>>>>> 7f7206d (initial commit of omm repo)
 import json
 import pandas as pd
 from sklearn import metrics
@@ -22,11 +18,7 @@ from scipy.stats import kendalltau, gamma
 class JSONFiles():
         
     def writeVarJSON(self, inputDF, isInput=True,
-<<<<<<< HEAD
                      jPath=Path.cwd(), debug=False):
-=======
-                     jPath=os.getcwd(), debug=False):
->>>>>>> 7f7206d (initial commit of omm repo)
         '''
         Writes a variable descriptor JSON file for input or output variables,
         based on an input dataframe containing predictor and prediction columns.
@@ -100,11 +92,7 @@ class JSONFiles():
         else:
             fileName = 'outputVar.json'
             
-<<<<<<< HEAD
         with open(Path(jPath) / fileName, 'w') as jFile:
-=======
-        with open(os.path.join(jPath, fileName), 'w') as jFile:
->>>>>>> 7f7206d (initial commit of omm repo)
             dfDump = pd.DataFrame.to_dict(outputJSON.transpose()).values()
             json.dump(list(dfDump),
                       jFile,
@@ -114,17 +102,12 @@ class JSONFiles():
     def writeModelPropertiesJSON(self, modelName, modelDesc, targetVariable,
                                  modelType, modelPredictors, targetEvent,
                                  numTargetCategories, eventProbVar=None,
-<<<<<<< HEAD
                                  jPath=Path.cwd(), modeler=None):
         '''
         Writes a model properties JSON file. The JSON file format is required by the
         Model Repository API service and only eventProbVar can be 'None'.
-=======
-                                 jPath=os.getcwd()):
-        '''
         Writes a model properties JSON file. The JSON file format is dictated by 
         SAS Open Model Manager stipulations and only eventProbVar can be 'None'.
->>>>>>> 7f7206d (initial commit of omm repo)
         
         Parameters
         ---------------
@@ -147,12 +130,9 @@ class JSONFiles():
         jPath : string, optional
             Location for the output JSON file. The default is the current
             working directory.
-<<<<<<< HEAD
         modeler : string, optional
             The modeler name to be displayed in the model properties. The
             default value is None.
-=======
->>>>>>> 7f7206d (initial commit of omm repo)
             
         Yields
         ---------------
@@ -174,17 +154,12 @@ class JSONFiles():
             
         if eventProbVar is None:
             eventProbVar = 'P_' + targetVariable + targetEvent
-<<<<<<< HEAD
         # Replace <myUserID> with the user ID of the modeler that created the model.
         if modeler is None:
             try:
                 modeler = getpass.getuser()
             except OSError:
                 modeler = '<myUserID>'
-=======
-            
-        modeler = os.getlogin()
->>>>>>> 7f7206d (initial commit of omm repo)
         
         pythonVersion = sys.version.split(' ', 1)[0]
         
@@ -202,33 +177,21 @@ class JSONFiles():
         
         outputJSON = pd.Series(modelProperties, index=propIndex)
         
-<<<<<<< HEAD
         with open(Path(jPath) / 'ModelProperties.json', 'w') as jFile:
-=======
-        with open(os.path.join(jPath, 'ModelProperties.json'), 'w') as jFile:
->>>>>>> 7f7206d (initial commit of omm repo)
             dfDump = pd.Series.to_dict(outputJSON.transpose())
             json.dump(dfDump,
                       jFile,
                       indent=4,
                       skipkeys=True)
             
-<<<<<<< HEAD
     def writeFileMetadataJSON(self, modelPrefix, jPath=Path.cwd()):
-=======
-    def writeFileMetadataJSON(self, modelPrefix, jPath=os.getcwd()):
->>>>>>> 7f7206d (initial commit of omm repo)
         '''
         Writes a file metadata JSON file pointing to all relevant files.
         
         Parameters
         ---------------
         modelPrefix : string
-<<<<<<< HEAD
             The variable for the model name that is used when naming model files.
-=======
-            Variable name for the model to be displayed in model manager 
->>>>>>> 7f7206d (initial commit of omm repo)
             (i.e. hmeqClassTree + [Score.py || .pickle]).
         jPath : string, optional
             Location for the output JSON file. The default value is the current
@@ -248,22 +211,14 @@ class JSONFiles():
                                     columns = ['role', 'name']
                                     )
         
-<<<<<<< HEAD
         with open(Path(jPath) / 'fileMetadata.json', 'w') as jFile:
-=======
-        with open(os.path.join(jPath, 'fileMetadata.json'), 'w') as jFile:
->>>>>>> 7f7206d (initial commit of omm repo)
             dfDump = pd.DataFrame.to_dict(fileMetadata.transpose()).values()
             json.dump(list(dfDump),
                       jFile,
                       indent=4,
                       skipkeys=True)
             
-<<<<<<< HEAD
     def writeBaseFitStat(self, csvPath=None, jPath=Path.cwd(),
-=======
-    def writeBaseFitStat(self, csvPath=None, jPath=os.getcwd(),
->>>>>>> 7f7206d (initial commit of omm repo)
                          userInput=False, tupleList=None):
         '''
         Writes a JSON file to display fit statistics for the model in SAS Open Model Manager.
@@ -321,12 +276,7 @@ class JSONFiles():
                        '_ASE_', '_MCLL_', '_KS_', '_KSPostCutoff_', '_DIV_',
                        '_TAU_', '_KSCut_', '_C_']
         
-<<<<<<< HEAD
         nullJSONPath = Path(__file__).resolve().parent / 'null_dmcas_fitstat.json'
-=======
-        nullJSONPath = os.path.join(os.path.dirname(__file__),
-                                       'null_dmcas_fitstat.json')
->>>>>>> 7f7206d (initial commit of omm repo)
         nullJSONDict = self.readJSONFile(nullJSONPath)
         
         dataMap = [{}, {}, {}]
@@ -380,21 +330,13 @@ class JSONFiles():
         for i in range(3):
             outJSON['data'][i] = dataMap[i]
                 
-<<<<<<< HEAD
         with open(Path(jPath) / 'dmcas_fitstat.json', 'w') as jFile:
-=======
-        with open(os.path.join(jPath, 'dmcas_fitstat.json'), 'w') as jFile:
->>>>>>> 7f7206d (initial commit of omm repo)
             json.dump(outJSON,
                       jFile,
                       indent=4,
                       skipkeys=True)
             
-<<<<<<< HEAD
     def calculateFitStat(self, data, jPath=Path.cwd()):
-=======
-    def calculateFitStat(self, data, jPath=os.getcwd()):
->>>>>>> 7f7206d (initial commit of omm repo)
         '''
         Calculates fit statistics from user data and writes it to a JSON file for
         importing into the common model repository. Input data takes the form of a list of
@@ -424,12 +366,7 @@ class JSONFiles():
             Output JSON file located at jPath.
         '''
         
-<<<<<<< HEAD
         nullJSONPath = Path(__file__).resolve().parent / 'null_dmcas_fitstat.json'
-=======
-        nullJSONPath = os.path.join(os.path.dirname(__file__),
-                                       'null_dmcas_fitstat.json')
->>>>>>> 7f7206d (initial commit of omm repo)
         nullJSONDict = self.readJSONFile(nullJSONPath)
         
         dataPartitionExists = []
@@ -438,11 +375,6 @@ class JSONFiles():
                 dataPartitionExists.append(i)
                 
         for j in dataPartitionExists:
-<<<<<<< HEAD
-            fitStats = nullJSONDict['data'][j]['dataMap']
-
-            fitStats['_PartInd_'] = j
-=======
             fitStats = {}
             
             if j==0:
@@ -451,9 +383,8 @@ class JSONFiles():
                 fitStats['_DataRole_'] = 'TRAIN'
             elif j==2:
                 fitStats['_DataRole_'] = 'TEST'
-            fitStats.update({'_PartInd_': str(i),
-                            '_PartInd__f': f'           {i}'})
->>>>>>> 7f7206d (initial commit of omm repo)
+            fitStats.update({'_PartInd_': str(j),
+                            '_PartInd__f': f'           {j}'})
             
             fpr, tpr, _ = metrics.roc_curve(data[j][0], data[j][1])
         
@@ -498,23 +429,12 @@ class JSONFiles():
             C = metrics.auc(fpr, tpr)
             fitStats['_C_'] = C
         
-<<<<<<< HEAD
             nullJSONDict['data'][j]['dataMap'] = fitStats
 
         with open(Path(jPath) / 'dmcas_fitstat.json', 'w') as jFile:
             json.dump(nullJSONDict, jFile, indent=4)            
     
     def generateROCStat(self, data, targetName, jPath=Path.cwd()):
-=======
-            nullJSONDict['data'][j] = {'dataMap': fitStats,
-                                       'rowNumber': j,
-                                       'header': None}
-
-        with open(os.path.join(jPath, 'dmcas_fitstat.json'), 'w') as jFile:
-            json.dump(nullJSONDict, jFile, indent=4)            
-    
-    def generateROCStat(self, data, targetName, jPath=os.getcwd()):
->>>>>>> 7f7206d (initial commit of omm repo)
         '''
         Calculates the ROC curve from user data and writes it to a JSON file for
         importing in to common model repository. Input data takes the form of a list of
@@ -671,19 +591,11 @@ class JSONFiles():
                    'xInteger': False,
                    'yInteger': False}
         
-<<<<<<< HEAD
         with open(Path(jPath) / 'dmcas_roc.json', 'w') as jFile:
             json.dump(outJSON, jFile, indent=4)
             
     def generateLiftStat(self, data, targetName,
                            targetValue, jPath=Path.cwd()):
-=======
-        with open(os.path.join(jPath, 'dmcas_roc.json'), 'w') as jFile:
-            json.dump(outJSON, jFile, indent=4)
-            
-    def generateLiftStat(self, data, targetName,
-                           targetValue, jPath=os.getcwd()):
->>>>>>> 7f7206d (initial commit of omm repo)
         '''
         Calculates the lift curves from user data and writes to a JSON file for
         importing to common model repository. Input data takes the form of a list of
@@ -871,11 +783,7 @@ class JSONFiles():
                    'xInteger': False,
                    'yInteger': False}
         
-<<<<<<< HEAD
         with open(Path(jPath) / 'dmcas_lift.json', 'w') as jFile:
-=======
-        with open(os.path.join(jPath, 'dmcas_lift.json'), 'w') as jFile:
->>>>>>> 7f7206d (initial commit of omm repo)
             json.dump(outJSON, jFile, indent=4)
         
     def calculateLift(self, actualValue, targetValue, predictValue):
@@ -1120,11 +1028,7 @@ class JSONFiles():
         paramLabel : string
             Description of the parameter.
         paramOrder : int
-<<<<<<< HEAD
             Order to be displayed in SAS Open Model Manager.
-=======
-            Order to be displayed in model manager.
->>>>>>> 7f7206d (initial commit of omm repo)
         paramValue : int, float, or str
             Value of the parameter.
                 
@@ -1150,8 +1054,4 @@ class JSONFiles():
                          'values': [paramName],
                          'preformatted': False}
         
-<<<<<<< HEAD
         return parameterDict
-=======
-        return parameterDict
->>>>>>> 7f7206d (initial commit of omm repo)

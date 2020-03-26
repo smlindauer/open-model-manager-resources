@@ -36,8 +36,4 @@ class ZipModel():
         
         with zipfile.ZipFile(Path(fileDir) / (modelPrefix + '.zip'), mode='w') as zFile:
             for name in fileNames:
-<<<<<<< HEAD
-                zFile.write(name, arcname=name)
-=======
                 zFile.write(Path(fileDir) / name, arcname=name)
->>>>>>> 7f7206d (initial commit of omm repo)
