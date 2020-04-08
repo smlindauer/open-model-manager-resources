@@ -374,6 +374,8 @@ class JSONFiles():
                 
         for j in dataPartitionExists:
             fitStats = nullJSONDict['data'][j]['dataMap']
+
+            fitStats['_PartInd_'] = j
             
             fpr, tpr, _ = metrics.roc_curve(data[j][0], data[j][1])
         
