@@ -93,19 +93,17 @@ class ModelImport():
         headers = {
                 'Origin': self.server,
                 'Authorization': authToken}
-        projectFilter = f'?filter=eq(name, \'{projectName}\')'
-        requestUrl = f'{self.server}/modelRepository/projects{projectFilter}'
+        requestUrl = f'{self.server}/modelRepository/projects?limit=100000'
         projectRequest = requests.get(requestUrl, headers=headers)
         
-        try:
-            projectID = projectRequest.json()['items'][0]['id']
-        except IndexError:
+        projectID = [x['id'] for x in projectRequest.json()['items'] if x['name']==projectName]
+        if not projectID:
             print(f'No project named {projectName} could be found.')
             print(f'Creating a new project named {projectName}.')
             projectID = self.createNewProject(projectName, authToken)
             return projectID
-            
-        return projectID
+        else:
+            return projectID
 
     def createNewProject(self, projectName, authToken):
         '''
