@@ -114,7 +114,53 @@ class ModelImport():
             host = host[7:]
         self.host = host
         self.server = 'http://' + host
+<<<<<<< HEAD
             
+=======
+        
+    def getAccessToken(self):
+        '''
+        Retrieves the access token from the host server for further API requests.
+        Requires user input for user name and password, but does not keep
+        password in memory.
+        
+        Returns
+        ---------------
+        authToken : string
+            Access token from JSON file from the API post request. Used for 
+            further API requests to the host server.
+        '''
+        
+        authURI = '/SASLogon/oauth/token'
+        headersAuth = {
+                'accept': 'application/json',
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Authorization': 'Basic c2FzLmVjOg=='
+                }
+        authToken = ''
+        username = ''
+        password = ''
+        notAuthenticated = True
+        
+        while notAuthenticated: 
+            username = input('Enter a user name:')
+            password = getpass.getpass('Enter the password for %s:' % username)
+            authBody = ('grant_type=password&username=' + username +
+                        '&password=' + password)
+            authReturn = requests.post(self.server + authURI,
+                                       data=authBody,
+                                       headers=headersAuth)
+            if authReturn.status_code == requests.codes.ok:
+                authToken = authReturn.json()['access_token']
+                notAuthenticated = False
+            else:
+                print('Please enter a valid user name and password.')
+        
+        password = ''
+        
+        return f'Bearer {authToken}'
+    
+>>>>>>> 183a83c (Updated README content and Python scripts, and added new Jupyter example.)
     def findProjectID(self, projectName, authToken):
         '''
         Given a project name, an API request is sent to the Model Repository API to find the
@@ -251,6 +297,7 @@ class ModelImport():
                   f'A model with the name "{modelPrefix}" already exists.')
             print('Enter a unique file name for the model ZIP file.')
             print('Model import failed: ' +
+<<<<<<< HEAD
                   f'A model named {modelPrefix} already exists.')
             print('Please adjust the zip file name appropriately.')
         
@@ -290,3 +337,44 @@ class ModelImport():
                                private_key=privateKey) as sftp:
             sftp.put(pLocalPath, remotepath=pRemotePath)
             sftp.chmod(pRemotePath, mode=777)
+=======
+                  f'A model with the name "{modelPrefix}" already exists.')
+            print('Please specify a unique file name for the ZIP file.')
+
+# The following code is obsolete and was deprecated after the November 2019 release.
+#    def uploadPickle(pLocalPath, pRemotePath,
+#                     host, username, password=None, privateKey=None):
+#        TODO: Remove password from memory as in self.getAccessToken()
+#        '''
+#        Uploads a local pickle file to a SAS Open Model Manager server via sftp. Set the
+#        permission of the pickle file on the server to 777 to allow the score
+#        code to use the pickle file.
+#        
+#        Parameters
+#        ---------------
+#        pLocalPath : string
+#            Local path of the pickle file.
+#        pRemotePath : string
+#            Remote path on the server for the pickle file's location.
+#        host : string
+#            Name of the host server to send the pickle file.
+#        username : string
+#            Server login credential username.
+#        password : string, optional
+#            Password for SFTP connection attempt. Default is None, in case
+#            user is using an RSA/DSA key pairing.
+#        privateKey : string, optional
+#            Private key location for RSA/DSA key pairing logins. Default is 
+#            None.
+#        '''
+#        
+#        # convert windows path format to linux path format
+#        if platform.system() == 'Windows':
+#            pRemotePath = ('/' + 
+#                           os.path.normpath(pRemotePath).replace('\\', '/'))
+#        
+#        with pysftp.Connection(host, username=username, password=password,
+#                               private_key=privateKey) as sftp:
+#            sftp.put(pLocalPath, remotepath=pRemotePath)
+#            sftp.chmod(pRemotePath, mode=777)
+>>>>>>> 183a83c (Updated README content and Python scripts, and added new Jupyter example.)
