@@ -32,11 +32,11 @@ class ScoreCode():
         Parameters
         ---------------
         inputDF : dataframe
-            A Data frame that contains training data, and includes only the predictor
+            A dataframe that contains training data, and includes only the predictor
             columns. This function currently only supports int(64), float(64),
             and str data types for scoring.
         targetDF : dataframe
-            A Data frame that contains training data of the target variable.
+            A dataframe that contains training data of the target variable.
         modelPrefix : string
             Variable name for the model to be displayed in model manager 
             (i.e. hmeqClassTree + [Score.py || .pickle]).      
