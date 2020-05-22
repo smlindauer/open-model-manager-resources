@@ -1,7 +1,7 @@
 # Copyright (c) 2020, SAS Institute Inc., Cary, NC, USA.  All Rights Reserved.
 # SPDX-License-Identifier: Apache-2.0
 
-import os
+from pathlib import Path
 
 import numpy as np
 
@@ -71,7 +71,7 @@ class ScoreCode():
         newVarList = list(inputVarList)
         inputDtypesList = list(inputDF.dtypes)        
     
-        pyPath = os.path.join(pyPath, modelPrefix + 'Score.py')
+        pyPath = pyPath / (modelPrefix + 'Score.py')
         with open(pyPath, 'w') as self.pyFile:
         
             self.pyFile.write('''\
