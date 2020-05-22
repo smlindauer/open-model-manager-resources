@@ -11,7 +11,7 @@ class ScoreCode():
     def writeScoreCode(self, inputDF, targetDF, modelPrefix,
                        predictMethod, pickleName,
                        metrics=['EM_EVENTPROBABILITY', 'EM_CLASSIFICATION'],
-                       pyPath=os.getcwd(), threshPrediction=None,
+                       pyPath=Path.cwd(), threshPrediction=None,
                        otherVariable=False):
         '''
         Writes a Python score code file based on training data used
