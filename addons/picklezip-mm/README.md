@@ -24,6 +24,7 @@ Use of this package requires the following:
   * scipy v1.4.0
   * scikit v0.22.1
   * pandas v0.25.3
+  * requests v2.23.0
 
 ## Installation
 
