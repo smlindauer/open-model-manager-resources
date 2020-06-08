@@ -14,13 +14,11 @@ class ScoreCode():
                        pyPath=Path.cwd(), threshPrediction=None,
                        otherVariable=False):
         '''
-        Writes a Python score code file based on training data used
-        to generate the model pickle file. The python file is included in
-        the ZIP file to be imported into SAS Open Model Manager or SAS Model Manager.
+        Writes a Python score code file based on training data used to generate the model pickle file. The Python file is included in
+        the ZIP file that is imported or registered into the common model repository. The model can then be used by SAS applications, such as SAS Open Model Manager.
         
         The score code that is generated is designed to be a working template for any
-        Python model to be used in SAS Open Model Manager, but is not guaranteed 
-        to work out of the box for scoring and publishing/validating.
+        Python model, but is not guaranteed to work out of the box for scoring, publishing, or validating the model.
         
         Note that for categorical variables, the variable is split into
         the possible categorical values of the variable. Also, by default it does NOT
@@ -31,14 +29,14 @@ class ScoreCode():
         
         Parameters
         ---------------
-        inputDF : dataframe
-            A dataframe that contains training data, and includes only the predictor
-            columns. This function currently only supports int(64), float(64),
+        inputDF : DataFrame
+            The `DataFrame` object contains the training data, and includes only the predictor
+            columns. The writeScoreCode function currently only supports int(64), float(64),
             and str data types for scoring.
-        targetDF : dataframe
-            A dataframe that contains training data of the target variable.
+        targetDF : DataFrame
+            The `DataFrame` object contains the training data for the target variable.
         modelPrefix : string
-            Variable name for the model to be displayed in model manager 
+            The variable for the model name that is used when naming model files.
             (i.e. hmeqClassTree + [Score.py || .pickle]).      
         predictMethod : string
             User-defined prediction method for score testing. This should be
@@ -48,7 +46,7 @@ class ScoreCode():
         pickleName : string
             Name of the pickle file that contains the model.
         metrics : string list, optional
-            The scoring metrics for SAS Open Model Manager. The default is a set of two
+            The scoring metrics for the model. The default is a set of two
             metrics: EM_EVENTPROBABILITY and EM_CLASSIFICATION.
         pyPath : string, optional
             The local path of the score code file. The default is the current
@@ -64,7 +62,7 @@ class ScoreCode():
     		Yields
     		---------------
         '*Score.py'
-            The Python score code file for SAS Open Model Manager.
+            The Python score code file for the model.
         '''       
         
         inputVarList = list(inputDF.columns)
