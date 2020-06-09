@@ -15,11 +15,7 @@ def getFile(fName):
     
 setup(
       name='picklezip-mm',
-<<<<<<< HEAD
       version='1.01',
-=======
-      version='1.0',
->>>>>>> 7f7206d (initial commit of omm repo)
       description='',
       long_description=getFile('README.md'),
       long_description_content_type='text/markdown',
@@ -31,12 +27,8 @@ setup(
       install_requires=[
               'scipy >= v1.4.0',
               'scikit-learn >= v0.22.1',
-<<<<<<< HEAD
               'pandas >= v0.25.3',
               'requests >= v2.23.0'
-=======
-              'pandas >= v0.25.3'
->>>>>>> 7f7206d (initial commit of omm repo)
               ],
       classifiers=[
               'Development Status :: 5 - Production/Stable',
