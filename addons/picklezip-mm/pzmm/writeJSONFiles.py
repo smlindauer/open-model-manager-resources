@@ -1019,7 +1019,7 @@ class JSONFiles():
         paramLabel : string
             Description of the parameter.
         paramOrder : int
-            Order to be displayed in model manager.
+            Order to be displayed in SAS Open Model Manager.
         paramValue : int, float, or str
             Value of the parameter.
                 

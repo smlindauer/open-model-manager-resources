@@ -2,7 +2,7 @@
 
 ## Overview
 
-The goal of this package is to provide users with a straight forward method to import trained Python models into SAS Model Manager and Open Model Manager. In order to complete this task, the package completes the following:
+The goal of this package is to provide users with a straight forward method to import trained Python models into SAS Model Manager and SAS Open Model Manager. In order to complete this task, the package completes the following:
 
 * Writes `.JSON` files needed for SAS Open Model Manager to read in the model information, which includes the following files:
   * fileMetadata.json specifies the file roles for the names of the input and output variables files, the Python score code file, and the Python pickle file
