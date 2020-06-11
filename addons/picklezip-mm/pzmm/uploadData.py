@@ -1,16 +1,6 @@
-# Copyright SAS Institute
-#
-#  Licensed under the Apache License, Version 2.0 (the License);
-#  you may not use this file except in compliance with the License.
-#  You may obtain a copy of the License at
-#
-#      http://www.apache.org/licenses/LICENSE-2.0
-#
-#  Unless required by applicable law or agreed to in writing, software
-#  distributed under the License is distributed on an "AS IS" BASIS,
-#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-#  See the License for the specific language governing permissions and
-#  limitations under the License.
+# Copyright (c) 2020, SAS Institute Inc., Cary, NC, USA.  All Rights Reserved.
+# SPDX-License-Identifier: Apache-2.0
+
 
 # %%
 import os
@@ -100,12 +90,12 @@ class ModelImport():
     
     def __init__(self, host):
         '''
-        Initialize ModelImport class with host location and username/password.
+        Initializes the  ModelImport class with host location, user name, and password.
         
         Parameters
         ---------------
         host : string
-            Name of the host server with a model manager installation.
+            Name of the host server with a SAS Open Model Manager installation.
         '''
         
         if host[:7] == 'http://':
@@ -115,9 +105,9 @@ class ModelImport():
             
     def findProjectID(self, projectName, authToken):
         '''
-        Given a project name, make an API request to model manager to find the 
-        project ID. If project ID is not found, create a new project and return
-        its project ID.
+        Given a project name, makes an API request to Model Repository API to find the 
+        project ID. If project ID is not found, creates a new project and returns
+
         
         Parameters
         ---------------
@@ -135,24 +125,23 @@ class ModelImport():
         headers = {
                 'Origin': self.server,
                 'Authorization': authToken}
-        projectFilter = f'?filter=eq(name, \'{projectName}\')'
-        requestUrl = f'{self.server}/modelRepository/projects{projectFilter}'
+        requestUrl = f'{self.server}/modelRepository/projects?limit=100000'
         projectRequest = requests.get(requestUrl, headers=headers)
         
-        try:
-            projectID = projectRequest.json()['items'][0]['id']
-        except IndexError:
-            print(f'No project named {projectName} could be found.')
-            print(f'Creating a new project named {projectName}.')
+        projectID = [x['id'] for x in projectRequest.json()['items'] if x['name']==projectName]
+        if not projectID:
+            print(f'A project with the name "{projectName}" could not be found.')
+            print(f'A new project with the name "{projectName}" is being created.')
             projectID = self.createNewProject(projectName, authToken)
             return projectID
-            
-        return projectID
+        else:
+            return projectID
 
     def createNewProject(self, projectName, authToken):
         '''
-        Determine the public repository folder ID. Then create a new project 
-        on model manager to store models in.
+        Determines the Public repository folder ID, and then creates a new project 
+        in the common model repository to store the models.
+
         
         Parameters
         ---------------
@@ -188,25 +177,28 @@ class ModelImport():
                     projectName=None, zPath=os.getcwd(),
                     username=None, password=None):
         '''
-        Import zipped pickle file and corresponding python and json files into
-        model manager using the 'import model' API. 
+        Imports the zipped pickle file and corresponding Python and JSON files into
+        the common model repository using the 'import model' API request. 
+
         
         If the project ID is not known, provide the project name and an API
-        request will search for the project ID. If no project already exists, 
-        do not provide either the project name or ID and the function will 
-        create a new project via an API request.
+        request searches for the project ID. If a project does not already exist, and you
+        do not provide either the project name or ID, the function  
+        creates a new project via an API request.
+
         
         Parameters
         ---------------
         modelPrefix : string
-            Variable name for the model to be displayed in model manager 
+            Variable name for the model to be displayed in SAS Open Model Manager
             (i.e. hmeqClassTree + [Score.py || .pickle]).
         projectID : string, optional
-            Universally unique identifier string project identifier. Default is None.
+            Universally unique identifier string project identifier. The default 
+            value is None.
         projectName : string, optional
             Project name for retrieving the project ID. Default is None.
         zPath : string, optional
-            File location for the zipped archive. Default is the current
+            Location for the archive ZIP file. The default value is the current
             working directory.
         username : string
             Username used for authentication to the server.
@@ -245,15 +237,17 @@ class ModelImport():
             modelRequest.raise_for_status()
         except requests.exceptions.HTTPError:
             print('Model import failed: ' +
-                  f'A model named {modelPrefix} already exists.')
-            print('Please adjust the zip file name appropriately.')
+                  f'A model with the name "{modelPrefix}" already exists.')
+            print('Please specify a unique file name for the ZIP file.')
+
+# The following code is obsolete and was deprecated after the November 2019 release.
+
 # DEPRECIATED       
 #    def uploadPickle(pLocalPath, pRemotePath,
 #                     host, username, password=None, privateKey=None):
-#        #TODO: Remove password from memory as in self.getAccessToken() 
-#        #TODO: Obsoleted after 19w47 builds of model manager
+#        #        TODO: Remove password from memory as in self.getAccessToken()
 #        '''
-#        Upload a local pickle file to a model manager server via sftp. Set the
+#        Upload a local pickle file to a SAS Open Model Manager server via sftp. Set the
 #        permission of the pickle file on the server to 777 to allow the score
 #        code to use the pickle file.
 #        
