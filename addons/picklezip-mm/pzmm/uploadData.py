@@ -13,31 +13,31 @@ import json
 
 def getAccessToken(server, username=None, password=None):
     '''
-    Retrieve access token from the host server for further API requests. There
+    Retrieves an access token from the host server for further API requests. There
     are two options for retrieving an access token:
-        1. Only provide the host server in the arguments. The user will be 
-        prompted to input their username and password (the password will not
-        be displayed in the prompt, nor kept in memory). Five attempts are
+        1. Provide only the host server in the arguments. The user is
+        prompted to input their user name and password. The password is not
+        displayed in the prompt, nor kept in memory. Five attempts are
         allowed before the program exits.
-        2. Provide the username, password, and host server in the arguments.
+        2. Provide the user name, password, and host server in the arguments.
         After the authentication attempt, the password will be removed from
         the memory.
         
     Parameters
     ---------------
     server : string
-        Name of the host server with a model manager installation. Includes 
-        the protocol specification (i.e. http://).
+        Name of the host server with a SAS Open Model Manager or SAS Model Manager installation,
+        which includes the protocol specification (i.e. http://).
     username : string
-        Username used for authentication to the server.
+        The user name that is used for authentication with the server.
     password : string
-        Password used for authentication to the server.
+        The password that is  used for authentication with the server.
     
     Returns
     ---------------
     authToken : string
-        Access token from json file from the API post request. Used for 
-        further API requests to the host server.
+        Access token from the JSON file in the API post request. It can also be used for
+        additional API requests to the host server.
     '''
     
     authURI = '/SASLogon/oauth/token'
@@ -59,15 +59,15 @@ def getAccessToken(server, username=None, password=None):
             notAuthenticated = False
         else:
             notAuthenticated = True
-            print('The provided username and password combination failed to' + 
-                  ' authenticate. Please enter correct a username and' + 
-                  ' password combination.')
+            print('The specified user name and password could not be' +
+                  ' authenticated. Please enter a valid user name and' +
+                  ' password.')
     else:
         notAuthenticated = True
     
     loginAttempts = 0
     while (notAuthenticated and loginAttempts < 5): 
-        username = input('Enter username:')
+        username = input('Enter user name:')
         password = getpass.getpass('Enter password for %s:' % username)
         authBody = ('grant_type=password&username=' + username +
                     '&password=' + password)
@@ -78,7 +78,7 @@ def getAccessToken(server, username=None, password=None):
             authToken = authReturn.json()['access_token']
             notAuthenticated = False
         else:
-            print('Please enter correct username and password.')
+            print('Please enter a valid user name and password.')
             loginAttempts += 1
     
     password = ''
@@ -95,7 +95,7 @@ class ModelImport():
         Parameters
         ---------------
         host : string
-            Name of the host server with a SAS Open Model Manager installation.
+            Name of the host server with a SAS Open Model Manager or SAS Model Manager installation.
         '''
         
         if host[:7] == 'http://':
@@ -105,21 +105,21 @@ class ModelImport():
             
     def findProjectID(self, projectName, authToken):
         '''
-        Given a project name, makes an API request to Model Repository API to find the 
+        Given a project name, makes an API request to the Model Repository API to find the
         project ID. If project ID is not found, creates a new project and returns
-
+        its project ID.
         
         Parameters
         ---------------
         projectName : string
             Project name for retrieving the project ID.
         authToken : string
-            Access token used for API requests.
+            Access token that is used for API requests.
         
         Returns
         ---------------
         projectID : string
-            Universally unique identifier string project identifier.
+            The universally unique identifier string for a project.
         '''
         
         headers = {
@@ -141,19 +141,18 @@ class ModelImport():
         '''
         Determines the Public repository folder ID, and then creates a new project 
         in the common model repository to store the models.
-
         
         Parameters
         ---------------
         projectName : string
-            Project name for retrieving the project ID.
+            The project name used for retrieving the project ID.
         authToken : string
-            Access token used for API requests.      
+            The access token that is used for API requests.
         
         Returns
         ---------------
         projectID : string
-            Universally unique identifier string project identifier.
+            The universally unique identifier string for the project.
         '''
         
         repositoryHeaders = {'Authorization': authToken}
@@ -178,39 +177,36 @@ class ModelImport():
                     username=None, password=None):
         '''
         Imports the zipped pickle file and corresponding Python and JSON files into
-        the common model repository using the 'import model' API request. 
-
+        the common model repository using the 'import model' API request.
         
         If the project ID is not known, provide the project name and an API
         request searches for the project ID. If a project does not already exist, and you
         do not provide either the project name or ID, the function  
         creates a new project via an API request.
-
         
         Parameters
         ---------------
         modelPrefix : string
-            Variable name for the model to be displayed in SAS Open Model Manager
+            The variable for the model name that is used when naming the model files
             (i.e. hmeqClassTree + [Score.py || .pickle]).
         projectID : string, optional
-            Universally unique identifier string project identifier. The default 
-            value is None.
+            The universally unique identifier string for the project. The default value is None.
         projectName : string, optional
-            Project name for retrieving the project ID. Default is None.
+            The project name for retrieving the project ID. The default value is None.
         zPath : string, optional
             Location for the archive ZIP file. The default value is the current
             working directory.
         username : string
-            Username used for authentication to the server.
+            The user name that is used for authentication with the server.
         password : string
-            Password used for authentication to the server.            
+            The password that is used for authentication with the server.
         '''
         authToken = getAccessToken(self.server, username, password)
         
         if projectID is None and projectName is not None:
             projectID = self.findProjectID(projectName, authToken)
         elif projectID is None and projectName is None:
-            projectName = input('Please specify a new project name:')
+            projectName = input('Enter a new project name:')
             projectID = self.createNewProject(projectName, authToken)
         
         with open(zPath, 'rb') as zFile:
@@ -236,36 +232,34 @@ class ModelImport():
         try:
             modelRequest.raise_for_status()
         except requests.exceptions.HTTPError:
-            print('Model import failed: ' +
+            print('The model could not be imported: ' +
                   f'A model with the name "{modelPrefix}" already exists.')
-            print('Please specify a unique file name for the ZIP file.')
+            print('Enter a unique file name for the model ZIP file.')
 
 # The following code is obsolete and was deprecated after the November 2019 release.
-
-# DEPRECIATED       
 #    def uploadPickle(pLocalPath, pRemotePath,
 #                     host, username, password=None, privateKey=None):
-#        #        TODO: Remove password from memory as in self.getAccessToken()
+#        TODO: Remove password from memory as in self.getAccessToken()
 #        '''
-#        Upload a local pickle file to a SAS Open Model Manager server via sftp. Set the
+#        Uploads a local pickle file to a host server via sftp. Set the
 #        permission of the pickle file on the server to 777 to allow the score
 #        code to use the pickle file.
 #        
 #        Parameters
 #        ---------------
 #        pLocalPath : string
-#            Local path of the pickle file.
+#            The local path for the pickle file.
 #        pRemotePath : string
-#            Remote path on the server for the pickle file's location.
+#            The remote path on the server for the pickle file's location.
 #        host : string
-#            Name of the host server to send the pickle file.
+#            The name of the host server to send the pickle file.
 #        username : string
-#            Server login credential username.
+#            The server login credential user name.
 #        password : string, optional
-#            Password for SFTP connection attempt. Default is None, in case
-#            user is using an RSA/DSA key pairing.
+#            The password for SFTP connection attempt. The default value is None, in the case
+#            where the user is using an RSA/DSA key pairing.
 #        privateKey : string, optional
-#            Private key location for RSA/DSA key pairing logins. Default is 
+#            The private key location for the RSA/DSA key pairing logins. The default value is
 #            None.
 #        '''
 #        
