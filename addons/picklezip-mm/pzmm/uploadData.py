@@ -3,7 +3,7 @@
 
 
 # %%
-import os
+from pathlib import Path
 
 import requests
 import getpass
@@ -173,7 +173,7 @@ class ModelImport():
         return newProject.json()['id']
     
     def importModel(self, modelPrefix, projectID=None,
-                    projectName=None, zPath=os.getcwd(),
+                    projectName=None, zPath=Path.cwd(),
                     username=None, password=None):
         '''
         Imports the zipped pickle file and corresponding Python and JSON files into
