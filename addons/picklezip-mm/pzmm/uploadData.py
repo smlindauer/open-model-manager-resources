@@ -79,8 +79,14 @@ def getAccessToken(server, username=None, password=None):
             notAuthenticated = False
         else:
             print('Please enter a valid user name and password.')
+            print('The returned status code was %d.' % authReturn.status_code)
             loginAttempts += 1
-    
+            if loginAttempts == 5:
+                print('No remaining attempts. Exiting program.')
+                return False
+            else:
+                print('%d attempts left. \n' % (5-loginAttempts))
+
     password = ''
     
     return f'Bearer {authToken}'
@@ -203,6 +209,9 @@ class ModelImport():
         '''
         authToken = getAccessToken(self.server, username, password)
         
+        if not authToken:
+            return
+
         if projectID is None and projectName is not None:
             projectID = self.findProjectID(projectName, authToken)
         elif projectID is None and projectName is None:
