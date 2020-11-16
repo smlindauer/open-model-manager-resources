@@ -5,65 +5,30 @@ The [viya35](./viya35) directory contains the examples for configuration publish
 
 You can use the example Jupyter notebooks or Python scripts to create new publishing destinations for the following destination types: CAS, Amazon Web Services (AWS), Azure and Private Docker.
 
-_**Note:** Creating a publishing destination for Azure is only supported for SAS Viya 4._
+_**Note:** Creating a publishing destination for Azure is supported only for SAS Viya 4._
 
 ## SAS Viya 4
 
-**Content in progress...**
 
-### Prerequisites for Creating a Publishing Destination for SAS Viya 4
+### Prerequisites
+
+Here are the prerequisites for creating a new publishing destination for SAS Viya 2020.1 or later:
 
 * Make sure that you have Python 3 with the requests package installed on the machine where you are going to run the Jupyter notebooks or scripts.
+* Configure Azure to enable publishing validation for an Azure destination.
 
-**_Question: Where should Python be installed to run the Jupyter notebooks?_**
-
-### Enable Publishing Validation on Azure
-
-1. Create and integrate an Azure Active Directory Application with an Azure Kubernetes Service cluster.
-   
-   Use the following modifications when performing the steps in the [Azure Active Directory Integration](https://docs.microsoft.com/en-us/azure/aks/azure-ad-integration) documentation: 
-    
-      1. To associate a virtual machine (VM) with each node in the cluster, modify the 'az aks create' command to include two additional options, when creating the cluster:
-         ```
-	        --vm-set-type AvailabilitySet
-	        --load-balancer-sku basic
-         ```
-      2. You must add a static public IP address to each VM, and provide at least one of these IP addresses when creating a publishing destination.
-
-2. Add an inbound port rule to each VM with these values:
-   ```
-   Source: IP Addresses
-   Source IP Address: <customer IP range>
-   Source port ranges: *
-   Destination: Any
-   Destination port ranges: 30000-32767
-   Protocol: TCP
-   Action: Allow
-   Priority: 100
-   ```
-
-3. Add a contributor role to the Azure Active Directory application.
-
-   1. From the Azure portal, select **Subscriptions**.
-   2. Select the subscription where the cluster was created.
-   3. Select access control (IAM).
-   4. Click **Add** and select **Add role assignment**.
-   5. Select the following values from the drop-down lists:
-       
-          Role: Contributor
-          Assign access to: Azure AD user, group, service principal
-          Select: Search for your AAD server application
-          
-   6. Click **Save**.
+For more information, see [Configuring Publishing Destinations](http://documentation.sas.com/?cdcId=mdlmgrcdc&cdcVersion=default&docsetId=mdlmgrag&docsetTarget=n0x0rvwqs9lvpun16sfdqoff4tsk.htm) in _SAS Model Manager: Administrator's Guide_.
    
 ### Create Publishing Destinations
 
-Run the Jupyter notebook or Python script for a specific destination type to create a publishing destination:
+* Make sure that you modify the host URL (host_name and port), SAS account, Domain name, or private Docker information in the examples before you run them.
 
-* [CreateAWSDestination.ipynb](./CreateAWSDestination.ipynb)
-* [CreateAzureDestinatin.ipynb](./CreateAzureDestination.ipynb)
-* [CreatePrivateDockerDestination.ipynb](./CreatePrivateDockerDestination.ipynb)
-* [create_cas_destination.py](./create_cas_destination.py)
+* Run the Jupyter notebook or Python script for a specific destination type to create a publishing destination:
+
+  * [CreateAWSDestination.ipynb](./CreateAWSDestination.ipynb)
+  * [CreateAzureDestination.ipynb](./CreateAzureDestination.ipynb)
+  * [CreatePrivateDockerDestination.ipynb](./CreatePrivateDockerDestination.ipynb)
+  * [create_cas_destination.py](./create_cas_destination.py)
 
 
 ## SAS Viya 3.5
@@ -83,7 +48,7 @@ Here are the prerequisites for creating a new publishing destination for SAS Viy
    python create_aws_credential_domain.py
   ```
 
-* Make sure that you modify the host URL (viya_host and port), SAS account, Domain name, or private docker information in the script before you run them.
+* Make sure that you modify the host URL (viya_host and port), SAS account, Domain name, or private Docker information in the script before you run them.
 
 * If Python 3 executable file name is 'python3', then update the following commands to use 'python3', instead of 'python'.
   ```
